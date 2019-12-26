@@ -1,0 +1,11 @@
+@import  '../base/settings';
+
+.content-container{
+    margin: 0 auto;
+    padding: 0 $m-size;
+    width: 90%;
+    @media (min-width: $desktop-breakpoint){
+        width: 80%;
+    }
+}
+

@@ -1,0 +1,28 @@
+@import  '../base/settings';
+
+.header {
+    background-color: $dark-blue;
+    width: 100%;
+   
+}
+.header_content{
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    padding: $m-size 0;
+}
+.header_title{
+    color:white;
+    text-decoration: none;
+    h1{
+        margin: 0;
+        @media (min-width: $desktop-breakpoint){
+            font-size: $l-size;
+            font-weight: bold;
+        }
+        
+    }
+    &:hover{
+        text-decoration: none;
+    }
+}

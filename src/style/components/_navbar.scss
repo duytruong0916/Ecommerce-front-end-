@@ -1,0 +1,48 @@
+.navbar {
+  background-color: $dark-grey;
+  width: 100%;
+  position: sticky;
+  height: auto;
+  .store-name {
+    color: $off-white;
+  }
+}
+.navbar-collapse {
+  @media (min-width: $desktop-breakpoint) {
+    display: none;
+  }
+}
+.main {
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+  @media (max-width: $desktop-breakpoint) {
+    display: none;
+  }
+}
+.link-nav {
+  color: $grey;
+  font-size: $m-size;
+  text-decoration: none;
+  @media (min-width: $desktop-breakpoint) {
+    font-size: $mx-size;
+  }
+  &:hover {
+    text-decoration: none;
+    color: $off-white;
+  }
+}
+.is-active{
+    color: $off-white;
+}
+button,
+.fa-bars {
+  outline: none;
+  color: white;
+  border: none;
+  font-size: 30px;
+  background-color: none;
+  @media (min-width: $desktop-breakpoint) {
+    display: none;
+  }
+}

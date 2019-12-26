@@ -1,0 +1,34 @@
+@import '../base/settings';
+
+.button{
+    padding: $s-size;
+    border: 1px solid $blue;
+    font-weight: 300;
+    color:$blue;;
+    display: inline-block;
+    text-decoration: none;
+    font-size: $font-size-medium;
+    @media (min-width: $desktop-breakpoint){
+        font-size: $font-size-large;
+    }
+    &:hover{
+        text-decoration: none;
+    }
+}
+.button-blue{
+    background-color: $blue;
+    color:white;
+}
+.button-red{
+    background-color: red;
+    color:white;
+}
+.button-link{
+    background: none;
+}
+.button:hover{
+    cursor: pointer;
+}
+.button-secondary{
+    background-color: #888;
+}

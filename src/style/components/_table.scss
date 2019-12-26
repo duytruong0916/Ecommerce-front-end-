@@ -1,0 +1,8 @@
+
+.product-item{
+    display: inline;
+    @media (max-width: $desktop-breakpoint){
+        
+        display: block;
+    }
+}

@@ -1,0 +1,11 @@
+@import  '../base/settings';
+.input-group{
+    display: flex;
+    flex-direction: column;
+    @media (min-width: $desktop-breakpoint){
+        flex-direction: row;
+    }
+}
+.input-group-item{
+    margin-bottom: $s-size;
+}
