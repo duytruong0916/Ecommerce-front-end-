@@ -9,6 +9,7 @@
     "bootstrap": "^4.4.1",
     "braintree-web": "^3.56.0",
     "braintree-web-drop-in-react": "^1.1.0",
+    "email-validator": "^2.0.4",
     "history": "^4.10.1",
     "moment": "^2.24.0",
     "node-sass": "^4.13.0",

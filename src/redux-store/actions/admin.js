@@ -1,4 +1,4 @@
-const API ='http://localhost:8000/api';
+const API ='/api';
 
 export const CreateCategory = (userid, token, category) =>{
         return fetch(`${API}/category/create/${userid}`, {

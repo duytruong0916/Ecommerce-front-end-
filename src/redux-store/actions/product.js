@@ -1,5 +1,5 @@
 import queryString from 'query-string';
-const API = 'http://localhost:8000/api';
+const API ='/api';
 
 export const getProduct = (sortBy) => {
     return fetch(`${API}/products?sortBy=${sortBy}&order=desc&limit=6`, {

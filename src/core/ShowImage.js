@@ -1,5 +1,5 @@
 import React from 'react';
-const API ='http://localhost:8000/api';
+const API ='/api';
 
 const ShowImage = ({product, url})=>{
     return(
