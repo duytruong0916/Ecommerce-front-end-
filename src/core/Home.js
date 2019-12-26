@@ -32,7 +32,7 @@ const Home = () => {
     }, [])
     return (
         <Layout title='Home Page' description='App Node-React'>
-            <Search />
+           
             <h2>Best Sellers</h2>
             <div className='row'>
                 {productsBysell.map((product, i) => (
