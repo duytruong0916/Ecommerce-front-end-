@@ -68,26 +68,22 @@ const Card = ({addItem,  updateItem, removeItem, product, showviewbutton = true,
     }
     return (
         <div className='card'>
-            {shouldRedirect}
-            <div className='card-header'>{product.name}</div>
-            <div className='card-body'>
+            {shouldRedirect()}
+            <div className='card-header font-weight-bold'>{product.name}</div>
+            <div className='card-body card-info'>
                 <Link to= {`/product/${product._id}`} className= 'mr-2'>
                         <ShowImage product={product} url='product' />   
                 </Link>
-                <p className='lead mt-2'>{product.description.substring(0, 10)}</p>
-                <p className='mt-2'>${product.price}</p>
-                <p>
-                    Category: {product.category&&product.category.name}
-                </p>
-                <p>
-                    Added on: {moment(product.createdAt).fromNow()}
-                </p>
-                {ShowQuantity(product.quantity)}
-                <br />
-                {ShowViewButton(showviewbutton)}
-                {ShowCartbutton(showaddtocartbutton)}
-                {Showremovebutton(showremovebutton)}
-                {Showcartupdatebutton(cartupdate)}
+                <div className ='card-info'>
+                    <p className='card-description'>{product.description.substring(0, 10)}</p>
+                    <p className='card-price'>${product.price}</p>
+                    {ShowQuantity(product.quantity)}
+                    <br />
+                    {ShowViewButton(showviewbutton)}
+                    {ShowCartbutton(showaddtocartbutton)}
+                    {Showremovebutton(showremovebutton)}
+                    {Showcartupdatebutton(cartupdate)}
+                </div>
             </div>
         </div>
 
