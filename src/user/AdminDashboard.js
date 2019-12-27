@@ -18,7 +18,7 @@ export class AdminDashboard extends React.Component {
                             <Link to='/admin/addcategory'>Create Category</Link>
                         </li>
                         <li className='list-group-item'>
-                            <Link to={`/admin/addproduct`}>Crate Product</Link>
+                            <Link to={`/admin/addproduct`}>Add Products</Link>
                         </li>
                         <li className='list-group-item'>
                             <Link to='/admin/orders'>View Orders</Link>

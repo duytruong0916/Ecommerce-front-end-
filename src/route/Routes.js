@@ -18,6 +18,7 @@ import Orders from '../admin/Orders';
 import Profile from '../user/profile';
 import ManageProduct from '../admin/ManageProduct';
 import UpdateProduct from '../admin/UpdateProduct';
+import Search from '../core/Search';
 export const history = createHistory();
 const Routes = ()=>{
     return (
@@ -29,6 +30,7 @@ const Routes = ()=>{
                 <Route path='/home' exact component={Home}/>
                 <Route path='/shop' exact component={Shop}/>
                 <Route path='/cart' exact component={Cart}/>
+                <Route path='/search' exact component={Search}/>
                 <Route path='/product/:productid' exact component={Product}/>
                 <PrivateRoute path ='/user/dashboard' exact component={UserDashboard}/>
                 <PrivateRoute path ='/profile/:userid' exact component={Profile}/>

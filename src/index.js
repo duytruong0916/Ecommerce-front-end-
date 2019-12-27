@@ -6,6 +6,7 @@ import AppRouter, {history} from './route/Routes'
 import configureStore from './redux-store/configureStore';
 import {Provider} from 'react-redux';
 import {isAuthenticated} from './redux-store/actions/auth';
+import {itemTotal} from './redux-store/actions/cart';
 const store = configureStore();
 
 const jsx = (
@@ -28,6 +29,8 @@ const renderApp =() =>{
 if(isAuthenticated()){
     const user = isAuthenticated();
     store.dispatch({ type: 'LOGIN_SUCCESS', user});
+    const numberOfItem = itemTotal();
+    store.dispatch({ type: 'UPDATE_ITEM', numberOfItem});
     renderApp();
     if(history.location.pathnamehh==='/')
     {

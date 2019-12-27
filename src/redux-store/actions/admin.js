@@ -1,5 +1,5 @@
-const API ='/api';
-
+// const API ='/api';
+import API from '../../config';
 export const CreateCategory = (userid, token, category) =>{
         return fetch(`${API}/category/create/${userid}`, {
             method: 'POST',

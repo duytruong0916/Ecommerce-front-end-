@@ -1,6 +1,4 @@
-//import { API } from '../../config';
-const API ='http://localhost:8000/api';
-
+import  API  from '../../config';
 export const startSignUpWithEmail = (new_user = {}) => {
     return (dispatch) => {
        return fetch(`${API}/user/register`,{
@@ -31,6 +29,7 @@ export const startSignUpWithEmail = (new_user = {}) => {
   }
 
   export const startLoginWithEmail = (user = {}) => {
+      console.log(API)
     return (dispatch) => {
        return fetch(`${API}/user/authenticate`,{
             method: 'POST',

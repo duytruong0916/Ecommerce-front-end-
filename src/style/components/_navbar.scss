@@ -1,10 +1,41 @@
 .navbar {
-  background-color: $dark-grey;
+  background-color: #212529;
   width: 100%;
   position: sticky;
+  display: flex;
+  flex-direction: row;
   height: auto;
-  .store-name {
-    color: $off-white;
+}
+.store-name {
+  color: $off-white;
+}
+.profile_image {
+  width: $xl-size;
+  height: $xl-size;
+  @media (min-width: $desktop-breakpoint) {
+    width: $xxl-size;
+    height: $xxl-size;
+  }
+}
+.navbar-collapse{
+  background-color: #212529;
+  text-align: center;
+}
+.navbar_brand {
+  @media (max-width: $desktop-breakpoint) {
+    order: 2;
+
+ }
+}
+.account-dropdown{
+  @media (max-width: $desktop-breakpoint) {
+    order: 1;
+  }
+}
+.cart-search{
+  @media (max-width: $desktop-breakpoint) {
+    order: 3;
+
   }
 }
 .navbar-collapse {
@@ -13,9 +44,7 @@
   }
 }
 .main {
-  width: 40%;
-  display: flex;
-  justify-content: space-between;
+   margin:auto;
   @media (max-width: $desktop-breakpoint) {
     display: none;
   }
@@ -32,17 +61,27 @@
     color: $off-white;
   }
 }
-.is-active{
-    color: $off-white;
+.is-active {
+  color: $off-white;
 }
-button,
-.fa-bars {
-  outline: none;
-  color: white;
-  border: none;
-  font-size: 30px;
-  background-color: none;
+.navbar-toggle {
   @media (min-width: $desktop-breakpoint) {
     display: none;
   }
+}
+.fa {
+  outline: none;
+  color: white;
+  border: none;
+  font-size: $mx-size;
+  background-color: none;
+  @media (min-width: $desktop-breakpoint) {
+    font-size: $mx-size;
+  }
+}
+.cart-badge{
+  padding: 3px;
+  border: 1px solid orangered;
+  color: orangered;
+  border-radius: 100%;
 }

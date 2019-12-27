@@ -35,7 +35,9 @@ const Search = () => {
                 </h2>
                 <div className='row'>
                     {results.map((product, i) => (
-                        <Card product={product} key={i} />
+                        <div className = 'col-6 col-md-3' key={i}>
+                             <Card product={product} />
+                        </div>
                     ))}
                 </div>
             </div>
@@ -47,7 +49,7 @@ const Search = () => {
     }
     const searchMessage = (searched, results)=>{
         if(searched && results.length >0){
-            return `Found ${results.length} products`
+            return `${results.length} products found`
         }
         if(searched && results.length <1){
             return `No products founds`
@@ -77,7 +79,7 @@ const Search = () => {
                     </div>
                     <input
                         type='search'
-                        className='form-control'
+                        className='form-control w-100'
                         placeholder='Search by name'
                         onChange={handleChange('search')} />
                 </div>
@@ -88,8 +90,8 @@ const Search = () => {
         </form>
     )
     return (
-        <div className='row'>
-            <div className='container mb-3'>
+        <div>
+            <div className='container mb-3 mt-4'>
                 {searchForm()}
             </div>
             <div className='container-fluid mb-3'>

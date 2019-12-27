@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../core/Layout';
-import {getCart} from '../core/CartHelper';
+import {getCart}  from '../redux-store/actions/cart';
 import Card from '../core/Card';
 import { Link} from 'react-router-dom';
 import Checkout from '../core/Checkout';

@@ -1,6 +1,6 @@
 import React from 'react';
-const API ='/api';
-
+//const API ='/api';
+import API  from '../config';
 const ShowImage = ({product, url})=>{
     return(
         <div className ='product-image'>

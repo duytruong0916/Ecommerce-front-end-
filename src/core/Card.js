@@ -1,9 +1,10 @@
 import React,{ useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Link , Redirect} from 'react-router-dom';
 import ShowImage from '../core/ShowImage';
 import moment from  'moment';
-import {addItem,  updateItem, removeItem} from '../core/CartHelper';
-const Card = ({ product, showviewbutton = true, showaddtocartbutton =true, cartupdate =false, showremovebutton =false, run =undefined, setrun =f =>f}) => {
+import {addItem,  updateItem, removeItem} from '../redux-store/actions/cart';
+const Card = ({addItem,  updateItem, removeItem, product, showviewbutton = true, showaddtocartbutton =true, cartupdate =false, showremovebutton =false, run =undefined, setrun =f =>f}) => {
     const [redirect, setredirect] = useState(false);
     const [count, setcount] = useState(product.count);
 
@@ -67,10 +68,12 @@ const Card = ({ product, showviewbutton = true, showaddtocartbutton =true, cartu
     }
     return (
         <div className='card'>
+            {shouldRedirect}
             <div className='card-header'>{product.name}</div>
             <div className='card-body'>
-              
-                <ShowImage product={product} url='product' />
+                <Link to= {`/product/${product._id}`} className= 'mr-2'>
+                        <ShowImage product={product} url='product' />   
+                </Link>
                 <p className='lead mt-2'>{product.description.substring(0, 10)}</p>
                 <p className='mt-2'>${product.price}</p>
                 <p>
@@ -91,4 +94,13 @@ const Card = ({ product, showviewbutton = true, showaddtocartbutton =true, cartu
     )
 }
 
-export default Card;
+const mapStatetoProps = (state) => ({
+    numberOfItem: state.cart.item
+})
+const mapDispatchToProps = (dispatch) => ({
+    removeItem: (id) => dispatch(removeItem(id)),
+    addItem: (product) => dispatch(addItem(product)),
+    updateItem: (id, value) => dispatch(updateItem(id, value))
+});
+
+export default connect(mapStatetoProps, mapDispatchToProps)(Card);

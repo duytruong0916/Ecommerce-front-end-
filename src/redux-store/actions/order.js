@@ -1,5 +1,5 @@
-const API = 'http://localhost:8000/api';
 
+import  API  from '../../config';
 export const createOrder = (userid,token, orderdata)=>{
     return fetch(`${API}/order/create/${userid}`,{
         method: 'POST',

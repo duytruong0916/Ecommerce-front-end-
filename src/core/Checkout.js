@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getProduct, getBraintreeClientToken, processPayment } from '../redux-store/actions/product';
+import { getBraintreeClientToken, processPayment } from '../redux-store/actions/product';
 import {createOrder} from '../redux-store/actions/order';
-import {EmptyCart} from '../core/CartHelper';
+import {EmptyCart}  from '../redux-store/actions/cart';
 import DropIn from 'braintree-web-drop-in-react'
-const Checkout = ({ products, islogin, user,  run =undefined, setrun =f =>f}) => {
+const Checkout = ({EmptyCart, products, islogin, user,  run =undefined, setrun =f =>f}) => {
     const [data, setdata] = useState({
         loading:false,
         success:false,
@@ -64,12 +64,11 @@ const Checkout = ({ products, islogin, user,  run =undefined, setrun =f =>f}) =>
                         }
                         createOrder(user.user._id, user.token,orderdata).then(response =>{
                             //sent successfully and empty cart
-                            EmptyCart(()=>{
-                                console.log('Payment Success and empty cart')
-                                setdata({loading:false, success:true});
-                                run = true;
-                                setrun(run);
-                            });
+                            EmptyCart()
+                            console.log('Payment Success and empty cart')
+                            setdata({loading:false, success:true});
+                            run = true;
+                            setrun(run);
                         }).catch(err=>{
                             console.log(err)
                         })
@@ -135,4 +134,7 @@ const mapStatetoProps = (state) => ({
     islogin: !!state.auth.user,
     user: state.auth.user
 })
-export default connect(mapStatetoProps)(Checkout); 
+const mapDispatchToProps = (dispatch) => ({
+    EmptyCart: () => dispatch(EmptyCart())
+});
+export default connect(mapStatetoProps,mapDispatchToProps )(Checkout); 

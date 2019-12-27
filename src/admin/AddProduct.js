@@ -45,10 +45,13 @@ const AddProduct = (props) => {
         formdata.set(name, value);
         setdata({ ...data, [name]: value });
     }
+    useEffect(() => {
+        loadCategories();  
+     }, [])
     const onSubmit = (e) => {
         e.preventDefault();
         if (!name || !description || !price || !quantity || !shipping || !category || !photo) {
-            setdata({error: 'Missing field!', success: '' })
+            setdata({...data, error: 'Missing field!', success: '' })
         } else {
                 CreateProduct(props.user.user._id, props.user.token, formdata)
                 .then((data) => {
@@ -57,6 +60,8 @@ const AddProduct = (props) => {
                         setdata({ error })
                     } else {
                         setdata({
+                                categories: categories,
+                                formdata: new FormData(),
                                 name: '',
                                 description: '',
                                 price: '',
@@ -145,10 +150,6 @@ const AddProduct = (props) => {
             </form>
         )
     }
-    useEffect(() => {
-       loadCategories();
-      
-    }, [])
     return (
         <Layout title='Add a new Product' description='Create a new Product' >
             <div className='row'>

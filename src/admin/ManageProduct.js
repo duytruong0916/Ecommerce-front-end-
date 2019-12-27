@@ -7,6 +7,7 @@ import Card from '../core/Card';
 
 const ManageProduct = (props) => {
     const [products, setproducts] = useState([]);
+    const [deleted, setdeleted] = useState(false)
     const {user, token} = props.user;
     const loadProducts = () => {
         getProducts().then(data => {
@@ -23,6 +24,7 @@ const ManageProduct = (props) => {
                 console.log(data.error)
             } else {
                 loadProducts();
+                setdeleted(true);
             }
         })
     }
@@ -55,6 +57,13 @@ const ManageProduct = (props) => {
 
         )
     }
+    const ShowMessage= (deleted)=>{
+       let timer = setTimeout(() => {
+            setdeleted(false)
+            return clearTimeout(timer);
+          }, 3000);
+        return deleted&&<h2 className= 'text-center text-success'>Deleted Successfully</h2>
+    }
     useEffect(() => {
         loadProducts();
     }, [])
@@ -63,6 +72,7 @@ const ManageProduct = (props) => {
         <Layout title='Manage Product' description='Manage your product'>
             <div >
                 <h2 className='mb-4'>Total {products.length} products:</h2>
+                {ShowMessage(deleted)}
                 {ShowTable(products)}
             </div>
 

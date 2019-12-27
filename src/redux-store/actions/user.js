@@ -1,4 +1,5 @@
-const API ='/api';
+
+import  API  from '../../config';
 export const read = (userid, token)=>{
     return fetch(`${API}/user/${userid}`,{
         method: 'GET',

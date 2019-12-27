@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../core/Layout';
 import { connect } from 'react-redux';
 import {  getCategory } from '../redux-store/actions/admin'
-import { Link } from 'react-router-dom'
+import { Link ,Redirect} from 'react-router-dom'
 import { getProduct, updateProduct } from '../redux-store/actions/admin';
 
 const AddProduct = (props) => {
@@ -161,10 +161,11 @@ const AddProduct = (props) => {
     }
     return (
         <Layout title='Add a new Product' description='Create a new Product' >
+            {data.success&&<Redirect to='/admin/products'/>}
             <div className='row'>
                 <div className='col-md-8 offset-md-2'>
                     {AddProductForm()}
-                    <Link to='/admin/dashboard'>Go back to dashboard</Link>
+                    <Link to='/admin/products'>Go back to view the products</Link>
                 </div>
             </div>
         </Layout >
