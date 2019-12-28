@@ -19,6 +19,7 @@ import Profile from '../user/profile';
 import ManageProduct from '../admin/ManageProduct';
 import UpdateProduct from '../admin/UpdateProduct';
 import Search from '../core/Search';
+import ManageCategory from '../admin/ManageCategory';
 export const history = createHistory();
 const Routes = ()=>{
     return (
@@ -36,6 +37,7 @@ const Routes = ()=>{
                 <PrivateRoute path ='/profile/:userid' exact component={Profile}/>
                 <AdminRoute path ='/admin/dashboard' exact component={AdminDashboard} />
                 <AdminRoute path ='/admin/products' exact component={ManageProduct} />
+                <AdminRoute path ='/admin/categories' exact component={ManageCategory} />
                 <AdminRoute path ='/admin/orders' exact component={Orders} />
                 <AdminRoute path ='/admin/addcategory' exact component={Addcategory} />
                 <AdminRoute path ='/admin/addproduct' exact component={Addproduct} />

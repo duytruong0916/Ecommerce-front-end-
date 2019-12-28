@@ -1,6 +1,7 @@
 @import '../base/settings';
 
 .button{
+    font-weight: bold;
     border:none;
     outline: none;
     padding: $s-size;
@@ -19,7 +20,14 @@
         cursor: pointer;
     }
 }
-
+.button-white{
+    background-color: $off-white;
+    color: $dark-black;
+}
+.button-circle
+{
+    border-radius: 30%;
+}
 .button-secondary{
     background-color: #888;
 }

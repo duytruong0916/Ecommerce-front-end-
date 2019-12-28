@@ -86,3 +86,13 @@ export const processPayment = (userid,token, paymentdata)=>{
         console.log(err)
     });
 }
+
+export const getProductByCategory = (categoryId) => {
+    return fetch(`${API}/products/listbycategory/${categoryId}`, {
+        method: 'GET'
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err)
+    });
+}

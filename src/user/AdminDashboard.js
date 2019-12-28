@@ -15,17 +15,21 @@ export class AdminDashboard extends React.Component {
                     <h3 className='card-header'>User Link</h3>
                     <ul className='list-group'>
                         <li className='list-group-item'>
-                            <Link to='/admin/addcategory'>Create Category</Link>
+                            <Link to='/admin/addcategory'>Add Category</Link>
+                        </li>
+                        <li className='list-group-item'>
+                            <Link to='/admin/categories'>Manage Categories</Link>
                         </li>
                         <li className='list-group-item'>
                             <Link to={`/admin/addproduct`}>Add Products</Link>
                         </li>
                         <li className='list-group-item'>
-                            <Link to='/admin/orders'>View Orders</Link>
-                        </li>
-                        <li className='list-group-item'>
                             <Link to='/admin/products'>Manage Products</Link>
                         </li>
+                        <li className='list-group-item'>
+                            <Link to='/admin/orders'>View Orders</Link>
+                        </li>
+                        
                     </ul>
                 </div>
             )
