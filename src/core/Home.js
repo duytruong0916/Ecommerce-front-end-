@@ -56,7 +56,7 @@ const Home = () => {
                 </div>
                 <div className='col-12 col-md-6 d-flex my-5'>
                     <div className='content-signup'>
-                        <div className='message'>MANAGE YOUR TIME</div>
+                        <div className='message mb-3'>MANAGE YOUR TIME</div>
                         <Link to='/signup'>
                             <span className='button button-circle px-5 font-weight-bold'>JOIN US</span>
                         </Link>
@@ -68,7 +68,7 @@ const Home = () => {
     const ShowPoster = (products, title, nameclass) => {
         return (
             <Fragment>
-                <div className={nameclass}>
+                <div className={nameclass} style={{justifyItems: 'center', display:'flex'}}>
                     <div className='content'>
                         <div className='text-white'>{title}</div>
                         <Link to='/shop'>
@@ -93,17 +93,16 @@ const Home = () => {
     return (
         <Layout title='Home Page' description='App Node-React'>
             <div className='d-md-none d-flex text-center small'>
-                <Link to='/shop' className='bg-light w-50 p-4 border font-weight-bold unlink'>
+                <Link to='/shop' className='bg-light w-50 p-3 border font-weight-bold unlink'>
                     <span >SHOP NEW MENS</span>
                 </Link>
-                <Link to='/shop' className='bg-light w-50 p-4 border font-weight-bold unlink'>
+                <Link to='/shop' className='bg-light w-50 p-3 border font-weight-bold unlink'>
                     <span >SHOP NEW WOMENS</span>
                 </Link>
             </div>
             {ShowPoster(productsMen, 'BE A GENTLEMAN', 'home-poster-men')}
             {ShowSignUp()}
             {ShowPoster(productsWomen, 'BE GORGEOUS', 'home-poster-women')}
-            <Footer />
 
         </Layout>
     )

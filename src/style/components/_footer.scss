@@ -1,0 +1,14 @@
+.footer-wrapper{
+    width: 100%;
+    background-color: black;
+    color:white;
+}
+.footer-policy{
+    justify-content: center;
+    display:flex;
+    flex-direction: row;
+    @media (max-width: 768px) {
+        flex-direction: column;
+        text-align: center;
+    }
+}
