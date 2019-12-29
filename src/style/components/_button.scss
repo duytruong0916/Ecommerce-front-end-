@@ -12,13 +12,22 @@
     text-decoration: none;
     font-size: $font-size-medium;
     @media (max-width: $desktop-breakpoint){
-        font-size: $font-size-xsmall;
-        padding: $xs-size;
+        font-size: $font-size-small;
+        padding: $s-size;
     }
     &:hover{
         text-decoration: none;
         cursor: pointer;
+        background-color: $dark-grey;
     }
+}
+.button-card{
+    @extend.button;
+    @media (max-width: $desktop-breakpoint){
+        font-size: $font-size-medium;
+        padding: $xxs-size;
+    }
+
 }
 .button-white{
     background-color: $off-white;
@@ -30,4 +39,7 @@
 }
 .button-secondary{
     background-color: #888;
+}
+.new-link-color{
+    color: $dark-blue;
 }

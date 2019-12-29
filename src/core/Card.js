@@ -17,14 +17,14 @@ const Card = ({addItem,  updateItem, removeItem, product, showviewbutton = true,
     }
     const ShowQuantity = (quantity) =>{
         return  quantity>0 ?
-        ( <span className = 'badge badge-primary badge-pill'>In stock</span>):
-        (<span className = 'badge badge-primary badge-pill'>Out of stock</span>)
+        ( <span className = 'small card-price'>In stock</span>):
+        (<span className = 'small card-price'>Out of stock</span>)
     }
     const ShowViewButton = (showviewbutton) => {
         return (
             showviewbutton && (
                 <Link to= {`/product/${product._id}`} className= 'mr-2'>
-                      <button className='button button-blue mr-2 mb-2'>View product</button>
+                      <button className='button-card mr-2 mb-2'>View product</button>
                 </Link>
             )
         )
@@ -41,13 +41,13 @@ const Card = ({addItem,  updateItem, removeItem, product, showviewbutton = true,
     }
     const ShowCartbutton =( showaddtocartbutton)=>{
         return(
-          showaddtocartbutton &&(<button className='button button-red mt-2 mb-2' onClick ={addToCart}>Add to cart</button>)
+          showaddtocartbutton &&(<button className='button-card mt-2 mb-2 w-50' onClick ={addToCart}>Add to cart</button>)
         )
     }
     const Showremovebutton =(removebutton)=>{
         return(
           removebutton &&(
-          <button className='button button-red mt-2 mb-2' onClick ={()=>{ 
+          <button className='button-card mt-2 mb-2' onClick ={()=>{ 
               setrun(!run)
               removeItem(product._id)}}>
              Remove item
@@ -69,13 +69,12 @@ const Card = ({addItem,  updateItem, removeItem, product, showviewbutton = true,
     return (
         <div className='card'>
             {shouldRedirect()}
-            <div className='card-header font-weight-bold'>{product.name}</div>
             <div className='card-body card-info'>
                 <Link to= {`/product/${product._id}`} className= 'mr-2'>
                         <ShowImage product={product} url='product' />   
                 </Link>
                 <div className ='card-info'>
-                    <p className='card-description'>{product.description.substring(0, 10)}</p>
+                    <p className='card-title'>{product.name}</p>
                     <p className='card-price'>${product.price}</p>
                     {ShowQuantity(product.quantity)}
                     <br />

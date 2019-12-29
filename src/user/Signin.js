@@ -8,11 +8,11 @@ const Signin = () => {
         <Layout title='Signin Page' description='App Node-React'>
             <div className='login_wrapper'>
                 <div className="login_box">
-                    <h1 className='login_title text-center font-weight-bold'>SHOES </h1>
-                    <div className='text-center'>It's time to get new shoes</div>
+                    <span className='page-header-title'>LOG INTO TimeFox </span>
+                    <div className='text-center'>It's time to manage your account</div>
                     <EmailPasswordPage />
                     <button className='button w-100 mt-4'>Login with Google</button>
-                    <div className='text-center mt-4'><NavLink to="/signup" activeClassName="is-active">CREATE AN ACCOUNT</NavLink></div>
+                    <div className='text-center mt-4 new-link-color small' >New to TimeFox? <NavLink to="/signup">CREATE AN ACCOUNT</NavLink></div>
                 </div>
             </div>
         </Layout>

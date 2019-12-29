@@ -3,7 +3,6 @@ import Layout from '../core/Layout';
 import { getProducts, deleteProduct } from '../redux-store/actions/admin';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Card from '../core/Card';
 
 const ManageProduct = (props) => {
     const [products, setproducts] = useState([]);

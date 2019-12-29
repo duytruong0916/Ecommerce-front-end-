@@ -12,11 +12,9 @@
     width: 80%;
     background-color: none;
     padding: $l-size $m-size;
-    border-radius: 0.3rem;
     display: block;
     @media (min-width: $desktop-breakpoint){
         width: 60%;
-        border: solid 1px $grey;
     }
 }
 

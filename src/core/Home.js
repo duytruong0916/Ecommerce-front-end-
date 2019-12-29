@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import Layout from '../core/Layout';
-import { Link , Redirect} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { getProductByCategory } from '../redux-store/actions/product';
 import { getCategory } from '../redux-store/actions/admin';
 import Card from '../core/Card';
@@ -17,10 +17,10 @@ const Home = () => {
                 console.log(data.error)
             } else {
                 const categories = data;
-                categories.map((ca,i)=>{
-                    if(ca.name==='Men watch'){
+                categories.map((ca, i) => {
+                    if (ca.name === 'MEN WATCH') {
                         loadProductMen(ca)
-                    }else{
+                    } else {
                         loadProductWomen(ca)
                     }
                 })
@@ -32,7 +32,7 @@ const Home = () => {
             if (response.error) {
                 console.log(response.error);
             } else {
-                setProductMen( response );
+                setProductMen(response);
             }
         })
     }
@@ -41,61 +41,68 @@ const Home = () => {
             if (response.error) {
                 console.log(response.error);
             } else {
-                setProductWomen( response );
+                setProductWomen(response);
             }
         })
     };
     useEffect(() => {
-      loaddata();
+        loaddata();
     }, [])
+    const ShowSignUp = () => {
+        return (
+            <div className='row'>
+                <div className='col-12 col-md-6'>
+                    <img src='\asset\fish1.png' className='mw-100' />
+                </div>
+                <div className='col-12 col-md-6 d-flex my-5'>
+                    <div className='content-signup'>
+                        <div className='message'>MANAGE YOUR TIME</div>
+                        <Link to='/signup'>
+                            <span className='button button-circle px-5 font-weight-bold'>JOIN US</span>
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+    const ShowPoster = (products, title, nameclass) => {
+        return (
+            <Fragment>
+                <div className={nameclass}>
+                    <div className='content'>
+                        <div className='text-white'>{title}</div>
+                        <Link to='/shop'>
+                            <span className='button button-white button-circle px-5 font-weight-bold'>SHOP</span>
+                        </Link>
+                    </div>
+                </div>
+                <div className='row product-display'>
+                    <div className='display-header col-6 col-md-3'>
+                        New Arrivals
+                </div>
+                    {products.map((product, i) => (
+                        <div className='col-md-3 col-6 mb-4 mt-4' key={i}>
+                            <Card product={product} showviewbutton = {false} showaddtocartbutton={false}/>
+                        </div>
+                    ))}
+                </div>
+            </Fragment>
+        )
+
+    }
     return (
         <Layout title='Home Page' description='App Node-React'>
-
-            <div className= 'd-md-none d-flex text-center small'>
-                <Link className='bg-light w-50 p-4 border font-weight-bold unlink'>
+            <div className='d-md-none d-flex text-center small'>
+                <Link to='/shop' className='bg-light w-50 p-4 border font-weight-bold unlink'>
                     <span >SHOP NEW MENS</span>
                 </Link>
-                <Link className='bg-light w-50 p-4 border font-weight-bold unlink'>
+                <Link to='/shop' className='bg-light w-50 p-4 border font-weight-bold unlink'>
                     <span >SHOP NEW WOMENS</span>
                 </Link>
             </div>
-            <div className='home-poster-men'>
-            <div className='content'>
-                    <div className= 'text-white'>BE A GENTLEMAN</div>
-                        <Link>
-                            <span className='button button-white button-circle px-5 font-weight-bold'>SHOP</span>
-                        </Link>
-                    </div>
-            </div>
-            <div className='row'>
-                <div className='display-header col-6 col-md-3'>
-                    New Arrivals
-                </div>
-                {productsMen.map((product, i) => (
-                    <div className='col-md-3 col-6 mb-4' key={i}>
-                        <Card product={product} />
-                    </div>
-                ))}
-            </div>
-            <div className='home-poster-women'>
-                    <div className='content'>
-                    <div className= 'text-white'>TAKE YOU TIME</div>
-                        <Link>
-                            <span className='button button-white button-circle px-5 font-weight-bold'>SHOP</span>
-                        </Link>
-                    </div>
-                </div>
-            <div className='row'>
-                <div className='display-header col-6 col-md-3'>
-                    New Arrivals
-                     </div>
-                {productsWomen.map((product, i) => (
-                    <div className='col-md-3 col-6 mb-4' key={i}>
-                        <Card product={product} />
-                    </div>
-
-                ))}
-            </div>
+            {ShowPoster(productsMen, 'BE A GENTLEMAN', 'home-poster-men')}
+            {ShowSignUp()}
+            {ShowPoster(productsWomen, 'BE GORGEOUS', 'home-poster-women')}
             <Footer />
 
         </Layout>

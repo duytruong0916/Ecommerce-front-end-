@@ -14,7 +14,7 @@
     height: 80vh;
     background-image: url('/asset/women-images/w-image-5.jpg');
     background-size: cover;
-    background-repeat: no-repeat;
+    background-position: center;
     @media (min-width: $desktop-breakpoint) {
         background-image: url('/asset/women-images/w-image-6.jpg');
         background-size: cover;
@@ -25,11 +25,21 @@
           padding: 100px 50px;
           font-size: $font-size-title;
           @media (max-width: $desktop-breakpoint) {
-           
             font-size: $font-size-xlarge;
-           
           }
       }
+}
+.content-signup{
+    margin: auto;
+    text-align: center;
+    .message{
+        font-size: $font-size-title;
+        color: black;
+        @media (max-width: $desktop-breakpoint) {
+            font-size: $font-size-large;
+          }
+       
+    }
 }
 .home-poster-men{
     @extend .home-poster-women;
@@ -46,4 +56,8 @@
         text-decoration: none;
         color: black;
     }
+}
+.product-display{
+    width: 90%;
+    margin: auto;
 }

@@ -31,7 +31,6 @@ class EmailPasswordPage extends React.Component {
   }
   onSubmit =(e) =>{
      e.preventDefault();
-     console.log('hrere')
      if(!this.state.email||!this.state.password)
         {
             this.setState(()=>({error: "Missing Email or Password"}))
@@ -74,7 +73,7 @@ class EmailPasswordPage extends React.Component {
              {this.state.error && <p>{this.state.error}</p>}
           </div>
           <button className='button mt-4 w-50'>Next</button>
-          <div className='mt-3'><NavLink to="/resetpassword" activeClassName="is-active">Forgot Password?</NavLink></div>
+          <div className='mt-3'><NavLink to="/resetpassword" className='new-link-color'>I've forgotten my password</NavLink></div>
        </form>
      </div>
    )

@@ -3,6 +3,7 @@ import Layout from '../core/Layout';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getPurchaseHistory } from '../redux-store/actions/user';
+import { startLogOut } from '../redux-store/actions/auth';
 import moment from 'moment';
 const UserDashboard = (props) => {
     const [purchasehistoy, setpurchasehistory] = useState([]);
@@ -19,13 +20,16 @@ const UserDashboard = (props) => {
     const userLink = () => {
         return (
             <div className='card mb-3'>
-                <h3 className='card-header'>User Link</h3>
+                <h3 className='card-header'>User actions</h3>
                 <ul className='list-group'>
                     <li className='list-group-item'>
-                        <Link to='/cart'>My Cart</Link>
+                        <Link to='/cart'>View Cart</Link>
                     </li>
                     <li className='list-group-item'>
                         <Link to={`/profile/${_id}`}>Edit Profile</Link>
+                    </li>
+                    <li className='list-group-item text-danger' style={{cursor: 'pointer'}}>
+                         <span onClick={() => props.startLogout()}>Log out</span>
                     </li>
                 </ul>
             </div>
@@ -51,7 +55,7 @@ const UserDashboard = (props) => {
                     <li className="list-group-item">
                         {purchasehistoy.map((h, i) => {
                             return (
-                                <div>
+                                <div key={i}>
                                     <hr />
                                     {h.products.map((p, i) => {
                                         return (
@@ -97,4 +101,7 @@ const MapStateToProps = (state) => ({
     islogin: !!state.auth.user,
     userinfor: state.auth.user,
 })
-export default connect(MapStateToProps)(UserDashboard);
+const mapDispatchToProps = (dispatch) => ({
+    startLogout: () => dispatch(startLogOut())
+});
+export default connect(MapStateToProps,mapDispatchToProps)(UserDashboard);

@@ -1,5 +1,5 @@
 import React from 'react';
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory as createHistory } from 'history'
 import {Route, BrowserRouter, Switch} from 'react-router-dom';
 import PrivateRoute from '../route/PrivateRoute';
 import AdminRoute from '../route/AdminRoute';
@@ -26,6 +26,7 @@ const Routes = ()=>{
         <BrowserRouter history={history}>
             <Menu/>
             <Switch>
+                <Route path='/' component={Home} exact={true}/>
                 <Route path='/signin' exact component={Signin}/>
                 <Route path='/signup' exact component={Signup} />
                 <Route path='/home' exact component={Home}/>

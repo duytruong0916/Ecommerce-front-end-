@@ -30,13 +30,13 @@ const Search = () => {
     const searchedProducts = (results = []) => {
         return (
             <div>
-                <h2 className = 'mt-4 mb-4'>
-                     {searchMessage(searched, results)}
+                <h2 className='mt-4 mb-4'>
+                    {searchMessage(searched, results)}
                 </h2>
                 <div className='row'>
                     {results.map((product, i) => (
-                        <div className = 'col-6 col-md-3' key={i}>
-                             <Card product={product} />
+                        <div className='col-6 col-md-3' key={i}>
+                            <Card product={product} />
                         </div>
                     ))}
                 </div>
@@ -47,11 +47,11 @@ const Search = () => {
         e.preventDefault();
         searchData();
     }
-    const searchMessage = (searched, results)=>{
-        if(searched && results.length >0){
+    const searchMessage = (searched, results) => {
+        if (searched && results.length > 0) {
             return `${results.length} products found`
         }
-        if(searched && results.length <1){
+        if (searched && results.length < 1) {
             return `No products founds`
         }
     }
@@ -83,10 +83,11 @@ const Search = () => {
                         placeholder='Search by name'
                         onChange={handleChange('search')} />
                 </div>
-                <div className='btn input-group-append'>
-                    <button className='button'>Search</button>
-                </div>
+
             </span>
+            <div className=''>
+                <button className='button w-100'>Search</button>
+            </div>
         </form>
     )
     return (

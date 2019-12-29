@@ -14,8 +14,6 @@ export const startSignUpWithEmail = (new_user = {}) => {
           
         })
         .then(({msg,success})=>{
-            console.log(success)
-            console.log(msg)
             if(success){
                 return dispatch({ type: 'SIGNUP_SUCCESS'});
             }

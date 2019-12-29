@@ -63,7 +63,7 @@ export class SignUpForm extends React.Component {
                         <div>
                             <span className="font-weight-bold">First name:</span>
                             <input
-                                className='text-input w-50 ml-4'
+                                className='text-input w-75 ml-4'
                                 id='fistname'
                                 type='text'
                                 placeholder='First name'
@@ -73,7 +73,7 @@ export class SignUpForm extends React.Component {
                         <div>
                             <span className="font-weight-bold">Last name:</span>
                             <input
-                                className='text-input w-50 ml-4 mt-4'
+                                className='text-input w-75 ml-4 mt-4'
                                 id='lastname'
                                 type='text'
                                 placeholder='Last name'
@@ -94,7 +94,7 @@ export class SignUpForm extends React.Component {
                     <div>
                         <div><span className="font-weight-bold">Password:</span></div>
                         <input
-                            className={`login_input w-75 login_input ml-2 ${this.state.error || this.props.AuthError ? 'login_invalid_input' : ''}`}
+                            className={`login_input w-100 login_input ml-2 ${this.state.error || this.props.AuthError ? 'login_invalid_input' : ''}`}
                             id='password'
                             type='password'
                             placeholder='Password'
@@ -104,7 +104,7 @@ export class SignUpForm extends React.Component {
                     <div>
                         <div><span className="font-weight-bold">Confirm Password</span></div>
                         <input
-                            className={`login_input w-75 login_input ml-2 ${this.state.error || this.props.AuthError ? 'login_invalid_input' : ''}`}
+                            className={`login_input w-100 login_input ml-2 ${this.state.error || this.props.AuthError ? 'login_invalid_input' : ''}`}
                             id='confirm_password'
                             type='password'
                             placeholder='Confirm password'

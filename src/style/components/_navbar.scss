@@ -1,83 +1,102 @@
 .navbar {
-  background-color: #212529;
+  background-color: black;
   width: 100%;
-  position: sticky;
   display: flex;
   flex-direction: row;
   height: auto;
+  .navbar_brand {
+    @media (max-width: $desktop-breakpoint) {
+      order: 2;
+  
+   }
+  }
+  .account-dropdown{
+    @media (max-width: $desktop-breakpoint) {
+      order: 1;
+    }
+  }
+  .cart-search{
+    @media (max-width: $desktop-breakpoint) {
+      order: 3;
+  
+    }
+  }
 }
-.store-name {
-  color: $off-white;
-}
+
 .profile_image {
-  width: $xl-size;
-  height: $xl-size;
-  @media (min-width: $desktop-breakpoint) {
     width: $xxl-size;
     height: $xxl-size;
-  }
+
+}
+.profile_name{
+  color: $off-white;
+  font-size: $font-size-xxlarge;
+  letter-spacing: $xxs-size;
+  font-family: 'Gochi Hand', cursive;
+}
+.unlink{
+  text-decoration: none;
 }
 .navbar-collapse{
   background-color: #212529;
   text-align: center;
 }
-.navbar_brand {
-  @media (max-width: $desktop-breakpoint) {
-    order: 2;
-
- }
-}
-.account-dropdown{
-  @media (max-width: $desktop-breakpoint) {
-    order: 1;
-  }
-}
-.cart-search{
-  @media (max-width: $desktop-breakpoint) {
-    order: 3;
-
-  }
-}
-.navbar-collapse {
+.navbar-collapse, .navbar-toggle {
   @media (min-width: $desktop-breakpoint) {
     display: none;
   }
 }
 .main {
    margin:auto;
-  @media (max-width: $desktop-breakpoint) {
+  @media (max-width: $desktop-breakpoint - 0.01rem ) {
+    display: none;
+  }
+}
+.account, .search,.profile_image {
+  @media (max-width: $desktop-breakpoint - 0.01rem ) {
     display: none;
   }
 }
 .link-nav {
   color: $grey;
   font-size: $m-size;
+  letter-spacing: $xxs-size;
   text-decoration: none;
   @media (min-width: $desktop-breakpoint) {
     font-size: $mx-size;
+    &:hover {
+      text-decoration: none;
+      color: $off-white;
+      border-bottom: $off-white solid 0.5px;
+    }
   }
   &:hover {
     text-decoration: none;
     color: $off-white;
+    padding: $xs-size 0;
   }
 }
 .is-active {
   color: $off-white;
-}
-.navbar-toggle {
+  padding: $xs-size 0;
   @media (min-width: $desktop-breakpoint) {
-    display: none;
-  }
+    border-bottom: $off-white solid 0.5px;
 }
+}
+
 .fa {
   outline: none;
   color: white;
   border: none;
   font-size: $mx-size;
   background-color: none;
-  @media (min-width: $desktop-breakpoint) {
-    font-size: $mx-size;
-  }
+}
+.fa-bars,.fa-search{
+  font-size: $l-size;
+  color: $dark-blue;
+}
+.fa-search:hover{
+  color: white;
 }
 .cart-badge{
   padding: 3px;
