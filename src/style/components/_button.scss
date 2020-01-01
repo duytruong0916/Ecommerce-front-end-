@@ -23,11 +23,19 @@
 }
 .button-card{
     @extend.button;
+    margin: auto;
+    width: 90%;
+    background-color: black;
     @media (max-width: $desktop-breakpoint){
         font-size: $font-size-medium;
         padding: $xxs-size;
     }
 
+}
+.remove-button{
+    width: 25%;
+    margin: 0;
+    
 }
 .button-white{
     background-color: $off-white;

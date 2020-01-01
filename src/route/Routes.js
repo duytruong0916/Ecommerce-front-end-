@@ -22,6 +22,9 @@ import Search from '../core/Search';
 import ManageCategory from '../admin/ManageCategory';
 import Footer from '../core/footer';
 import ScrollToTop from '../route/ScrollToTop';
+
+import Men from '../core/Men';
+import Women from '../core/Women';
 export const history = createHistory();
 const Routes = () => {
     return (
@@ -29,6 +32,7 @@ const Routes = () => {
             <React.Fragment>
                 <ScrollToTop />
                 <Menu />
+                <div className ='WRAPPER'>
                 <Switch>
                     <Route path='/' component={Home} exact={true} />
                     <Route path='/signin' exact component={Signin} />
@@ -37,6 +41,8 @@ const Routes = () => {
                     <Route path='/shop' exact component={Shop} />
                     <Route path='/cart' exact component={Cart} />
                     <Route path='/search' exact component={Search} />
+                    <Route path='/men' exact component={Men} />
+                    <Route path='/women' exact component={Women} />
                     <Route path='/product/:productid' exact component={Product} />
                     <PrivateRoute path='/user/dashboard' exact component={UserDashboard} />
                     <PrivateRoute path='/profile/:userid' exact component={Profile} />
@@ -48,6 +54,7 @@ const Routes = () => {
                     <AdminRoute path='/admin/addproduct' exact component={Addproduct} />
                     <AdminRoute path='/admin/updateproduct/:productid' exact component={UpdateProduct} />
                 </Switch>
+                </div>
                 <Footer />
             </React.Fragment>
         </BrowserRouter>

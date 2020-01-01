@@ -33,7 +33,7 @@ const Product = (props) => {
     return (
         <Layout title= {product&&product.name} description={product&&product.description&&product.description.substring(0,100)}>
             <h2 className ='mb-4'>Single Product</h2>
-            <div className='row'>
+            <div className='product-wrapper row'>
                 <div className='col-8'>
                     {product&&product.description&&<Card product ={product} showviewbutton= {false}/>};
                 </div>

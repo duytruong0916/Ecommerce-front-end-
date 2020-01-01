@@ -1,0 +1,8 @@
+.card-item-shower{
+    max-height: 60vh;
+    overflow-y: scroll;
+    overflow-x:hidden; 
+}
+.card-item-shower::-webkit-scrollbar {
+    display: none;
+}

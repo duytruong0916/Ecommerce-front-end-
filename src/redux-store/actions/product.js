@@ -1,5 +1,6 @@
 import queryString from 'query-string';
 import API  from '../../config';
+
 export const getProduct = (sortBy) => {
     return fetch(`${API}/products?sortBy=${sortBy}&order=desc&limit=6`, {
         method: 'GET'
@@ -39,6 +40,7 @@ export const List = (params) => {
         console.log(err)
     });
 }
+//export const listByCategory = 
 export const Read = (productid) => {
     return fetch(`${API}/product/${productid}`, {
         method: 'GET'
@@ -87,8 +89,8 @@ export const processPayment = (userid,token, paymentdata)=>{
     });
 }
 
-export const getProductByCategory = (categoryId) => {
-    return fetch(`${API}/products/listbycategory/${categoryId}`, {
+export const getProductByCategory = (categoryId, skip=0, limit = 12) => {
+    return fetch(`${API}/products/listbycategory/${categoryId}?skip=${skip}&limit=${limit}`, {
         method: 'GET'
     }).then((response) => {
         return response.json();

@@ -36,7 +36,7 @@ const Search = () => {
                 <div className='row'>
                     {results.map((product, i) => (
                         <div className='col-6 col-md-3' key={i}>
-                            <Card product={product} />
+                            <Card product={product} showviewbutton={false}/>
                         </div>
                     ))}
                 </div>
@@ -67,31 +67,33 @@ const Search = () => {
     }
     const searchForm = () => (
         <form onSubmit={searchSubmit}>
-            <span className='input-group-text'>
+            <div className='input-group-text d-flex flex-row'>
                 <div className='input-group input-group-lg'>
                     <div className='input-group-prepend'>
-                        <select className='btn mr-2' onChange={handleChange('category')}>
-                            <option value='All'>Pick category</option>
+                        <select  onChange={handleChange('category')}>
+                            <option value='All'>PICK A CATEGORY</option>
                             {categories.map((c, i) => (
                                 <option key={i} value={c._id}>{c.name}</option>
                             ))}
                         </select>
                     </div>
-                    <input
-                        type='search'
-                        className='form-control w-100'
-                        placeholder='Search by name'
-                        onChange={handleChange('search')} />
+                    <div className ='w-100'>
+                        <input
+                            type='search'
+                            className='search-form input-text'
+                            placeholder='Search by name'
+                            onChange={handleChange('search')} />
+                    </div>
                 </div>
 
-            </span>
-            <div className=''>
-                <button className='button w-100'>Search</button>
+            </div>
+            <div className='text-center'>
+                <button className='button w-75'>SEARCH</button>
             </div>
         </form>
     )
     return (
-        <div>
+        <div className= 'search-wrapper'>
             <div className='container mb-3 mt-4'>
                 {searchForm()}
             </div>

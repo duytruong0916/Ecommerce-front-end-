@@ -26,13 +26,28 @@ const Shop = () => {
             }
         })
     }
-    const handleFilter = (filters, filterBy) => {
-        const newfilters = { ...myfilters }
-        newfilters.filters[filterBy] = filters;
+    const handleChange = (filterBy) => (e) => {
+        let filter_value = e.target.value;
+        const newfilters = { ...myfilters };
+        if (filter_value === 'All') {
+            filter_value = categories;
+        }
+        newfilters.filters[filterBy] = filter_value;
         if (filterBy == 'price') {
-            let pricevalues = handlePrice(filters);
+            let pricevalues = handlePrice(filter_value);
             newfilters.filters[filterBy] = pricevalues;
         }
+        loadFilterResults(newfilters.filters);
+        setFilter(newfilters);
+    }
+    const handleFilter = (filter_value, filterBy) => {
+        const newfilters = { ...myfilters }
+        newfilters.filters[filterBy] = filter_value;
+        if (filterBy == 'price') {
+            let pricevalues = handlePrice(filter_value);
+            newfilters.filters[filterBy] = pricevalues;
+        }
+
         loadFilterResults(newfilters.filters);
         setFilter(newfilters);
 
@@ -65,16 +80,16 @@ const Shop = () => {
             if (data.error) {
                 setError(data.error);
             } else {
-                setFilteredResults([...FilteredResults,...data.data]);
+                setFilteredResults([...FilteredResults, ...data.data]);
                 setsize(data.size);
                 setskip(toSkip);
             }
         });
     }
-    const loadmorebutton =()=>{
+    const loadmorebutton = () => {
         return (
-            size>0&&size>=limit &&(
-                <button className ='btn btn-warining mb-4' onClick={loadmore}>Load more</button>
+            size > 0 && size >= limit && (
+                <button className='button button-secondary' onClick={loadmore}>VIEW MORE</button>
             )
         )
     }
@@ -82,33 +97,66 @@ const Shop = () => {
         init();
         loadFilterResults(skip, limit, myfilters.filters)
     }, [])
+    const ShowRadioandCheckbox = () => (
+        <div className='d-lg-block d-none '>
+              <div className='section'>
+                <div className='check-title'>SHOP BY PRICE</div>
+                <ul className='check-option'>
+                    <Radiobox prices={prices} handleFilter={(filter) => handleFilter(filter, 'price')} />
+                </ul>
+            </div>
+            <div className='section'>
+                <div className='check-title'>SHOP BY CATEGORY</div>
+                <ul className='check-option'>
+                    <Checkbox categories={categories} handleFilter={(filter) => handleFilter(filter, 'category')} />
+                </ul>
+            </div>
+        </div>
+    )
+    const ShowSelectOption = () => (
+        <div className ='d-flex p-5 d-lg-none  justify-content-between '>
+            <div className='input-group-prepend double'>
+                <select  onChange={handleChange('category')}>
+                    <option value='All'>SHOP CATEGORY</option>
+                    {categories.map((c, i) => (
+                        <option key={i} value={c._id}>{c.name}</option>
+                    ))}
+                </select>
+            </div>
+            <div className='input-group-prepend double'>
+                <select  onChange={handleChange('price')}>
+                    <option >SHOP PRICE</option>
+                    {prices.map((p, i) => (
+                        <option key={i} value={p._id}>{p.name}</option>
+                    ))}
+                </select>
+            </div>
+        </div>
+
+    )
     return (
-        <Layout title='Shop Page' description='Time to search and pick' className='container-fluid'>
+
+        <div className='wrapper'>
             <div className='row'>
-                <div className='col-3'>
-                    <h2>Filter By Category</h2>
-                    <ul>
-                        <Checkbox categories={categories} handleFilter={(filter) => handleFilter(filter, 'category')} />
-                    </ul>
-                    <h2>Filter By Price Range</h2>
-                    <ul>
-                        <Radiobox prices={prices} handleFilter={(filter) => handleFilter(filter, 'price')} />
-                    </ul>
+                <div className='col-lg-3 col-12'>
+                    {ShowRadioandCheckbox()}
+                    {ShowSelectOption()}
                 </div>
-                <div className='col-9'>
-                    <h2 className='mb-4'>Products</h2>
+                <div className='col-lg-9 col-12 p-3 mt-5 p-5'>
                     <div className='row'>
                         {FilteredResults.map((product, i) => (
-                            <div className ='col-md-4 col-6 mb-3'>
-                                 <Card key={i} product={product} />
+                            <div className='col-lg-4 col-6 mb-3' key={i}>
+                                <Card product={product} showviewbutton={false} />
                             </div>
                         ))}
                     </div>
-                    <hr />
-                    {loadmorebutton()}
                 </div>
             </div>
-        </Layout>
+            <hr />
+            <div className='w-100 text-center p-5'>
+                 {loadmorebutton()}
+            </div>
+        </div>
     )
 }
 

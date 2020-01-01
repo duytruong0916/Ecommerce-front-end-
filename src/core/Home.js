@@ -28,7 +28,7 @@ const Home = () => {
         })
     };
     const loadProductMen = (ca) => {
-        getProductByCategory(ca._id).then((response) => {
+        getProductByCategory(ca._id, 0, 3).then((response) => {
             if (response.error) {
                 console.log(response.error);
             } else {
@@ -37,7 +37,7 @@ const Home = () => {
         })
     }
     const loadProductWomen = (ca) => {
-        getProductByCategory(ca._id).then((response) => {
+        getProductByCategory(ca._id, 0, 3).then((response) => {
             if (response.error) {
                 console.log(response.error);
             } else {
@@ -68,7 +68,7 @@ const Home = () => {
     const ShowPoster = (products, title, nameclass) => {
         return (
             <Fragment>
-                <div className={nameclass} style={{justifyItems: 'center', display:'flex'}}>
+                <div className={nameclass} style={{ justifyItems: 'center', display: 'flex' }}>
                     <div className='content'>
                         <div className='text-white'>{title}</div>
                         <Link to='/shop'>
@@ -79,10 +79,10 @@ const Home = () => {
                 <div className='row product-display'>
                     <div className='display-header col-6 col-md-3'>
                         New Arrivals
-                </div>
+                    </div>
                     {products.map((product, i) => (
                         <div className='col-md-3 col-6 mb-4 mt-4' key={i}>
-                            <Card product={product} showviewbutton = {false} showaddtocartbutton={false}/>
+                            <Card product={product} showviewbutton={false} showaddtocartbutton={false} />
                         </div>
                     ))}
                 </div>
@@ -93,10 +93,10 @@ const Home = () => {
     return (
         <Layout title='Home Page' description='App Node-React'>
             <div className='d-md-none d-flex text-center small'>
-                <Link to='/shop' className='bg-light w-50 p-3 border font-weight-bold unlink'>
+                <Link to='/men' className='bg-light w-50 p-3 border font-weight-bold unlink'>
                     <span >SHOP NEW MENS</span>
                 </Link>
-                <Link to='/shop' className='bg-light w-50 p-3 border font-weight-bold unlink'>
+                <Link to='/women' className='bg-light w-50 p-3 border font-weight-bold unlink'>
                     <span >SHOP NEW WOMENS</span>
                 </Link>
             </div>
