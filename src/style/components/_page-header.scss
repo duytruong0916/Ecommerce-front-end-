@@ -10,11 +10,9 @@
     }
 }
 .page-header-title{
-    margin: 40rem 0;
     font-size: $mx-size;
     font-weight: 700;
     text-decoration: none;
-    letter-spacing: $xxs-size;
     @media (min-width: $desktop-breakpoint){
         font-size: $l-size;
     }

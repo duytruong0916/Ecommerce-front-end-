@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Layout from '../core/Layout';
+import Carousel from '../core/Carousel';
 import Card from '../core/Card';
 import Checkbox from '../core/Checkbox';
 import Radiobox from '../core/Radiobox';
@@ -114,8 +114,8 @@ const Shop = () => {
         </div>
     )
     const ShowSelectOption = () => (
-        <div className ='d-flex p-5 d-lg-none  justify-content-between '>
-            <div className='input-group-prepend double'>
+        <div className ='d-lg-none d-block'>
+            <div className='input-group-prepend'>
                 <select  onChange={handleChange('category')}>
                     <option value='All'>SHOP CATEGORY</option>
                     {categories.map((c, i) => (
@@ -123,7 +123,7 @@ const Shop = () => {
                     ))}
                 </select>
             </div>
-            <div className='input-group-prepend double'>
+            <div className='input-group-prepend'>
                 <select  onChange={handleChange('price')}>
                     <option >SHOP PRICE</option>
                     {prices.map((p, i) => (
@@ -137,6 +137,7 @@ const Shop = () => {
     return (
 
         <div className='wrapper'>
+               <Carousel />
             <div className='row'>
                 <div className='col-lg-3 col-12'>
                     {ShowRadioandCheckbox()}

@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
+import Carousel from '../core/Carousel';
 import { startLogOut } from '../redux-store/actions/auth';
 import { connect } from 'react-redux';
 import Cart from './Cart';
@@ -9,7 +10,7 @@ const Menu = (props) => {
     const handleClick = () => {
         menuRef.current.click();
     }
-    const cartClick = ()=>{
+    const cartClick = () => {
         console.log('clicked')
         cartRef.current.click();
     }
@@ -73,7 +74,7 @@ const Menu = (props) => {
                 {props.userrole == 1 && <span className='ml-4 mr-4 account'>
                     <NavLink to={props.islogin ? '/admin/dashboard' : '/signin'} ><i className="fa fa-user-secret" aria-hidden="true"></i></NavLink>
                 </span>}
-                <span className='ml-4 mr-4' data-toggle="modal" data-target="#myModal"  ref={cartRef}>
+                <span className='ml-4 mr-4' data-toggle="modal" data-target="#myModal" ref={cartRef}>
                     <i className="fa fa-shopping-bag" aria-hidden="true"></i>{props.numberOfItem > 0 && <sup><small className='cart-badge'>{props.numberOfItem}</small></sup>}
                 </span>
             </div>
@@ -87,13 +88,10 @@ const Menu = (props) => {
                     <div className="modal-header">
                         <i className="fa fa-shopping-bag" aria-hidden="true"></i>
                         <div className="modal-title">REVIEW YOUR CART</div>
-                        <button type="button" className ='button button-white' data-dismiss="modal">&times;</button>
+                        <button type="button" className='button button-white' data-dismiss="modal"style={{fontSize:'18px'}}>&times;</button>
                     </div>
                     <div className="modal-body">
-                        <Cart cartClick ={cartClick}/>
-                    </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
+                        <Cart cartClick={cartClick} isinmenu={true} />
                     </div>
 
                 </div>
@@ -102,11 +100,24 @@ const Menu = (props) => {
     )
     return (
         <Fragment>
-            <div className='w-100 position-fixed ' style={{ zIndex: '1', top: 0 }}>
+            {/* <div className={`w-100 ${props.ischeckout?'position-absolute':'position-fixed'}`} style={{ zIndex: '1', top: 0 }}>
                 {renderMain()}
                 {renderToggle()}
-            </div>
-
+            </div> */}
+            {!props.ischeckout && <div className='w-100 position-fixed' style={{ zIndex: '1', top: 0 }}>
+                {renderMain()}
+                {renderToggle()}
+            </div>}
+            {props.ischeckout&&
+                <div className="navbar position-absolute" style={{ zIndex: '1', top: 0 }}>
+                <span className="navbar_brand mx-auto " >
+                    <div className='unlink'>
+                        <img src='/asset/fish1.png' className='profile_image_checkout mr-4' />
+                        <span className='profile_name'>TIMEFOX</span>
+                    </div>
+                </span>
+            </div>}
+                
             {showCart()}
         </Fragment>
     )
@@ -116,6 +127,7 @@ const mapStatetoProps = (state) => ({
     AuthError: state.auth.authError,
     islogin: !!state.auth.user,
     userrole: state.auth.userrole,
+    ischeckout: state.auth.checkout,
     numberOfItem: state.cart.item
 })
 const mapDispatchToProps = (dispatch) => ({

@@ -92,3 +92,14 @@ export const isAuthenticated = ()=>{
     }
     
 }
+
+export const startCheckout =()=>{
+    return (dispatch) =>{
+        return dispatch({type:'CHECK_OUT'})
+    }
+}
+export const FinishedCheckout =()=>{
+    return (dispatch) =>{
+        return dispatch({type:'FINISH_CHECK_OUT'})
+    }
+}

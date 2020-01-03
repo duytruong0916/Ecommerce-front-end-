@@ -25,6 +25,7 @@ import ScrollToTop from '../route/ScrollToTop';
 
 import Men from '../core/Men';
 import Women from '../core/Women';
+import Checkout from '../core/Checkout';
 export const history = createHistory();
 const Routes = () => {
     return (
@@ -39,10 +40,10 @@ const Routes = () => {
                     <Route path='/signup' exact component={Signup} />
                     <Route path='/home' exact component={Home} />
                     <Route path='/shop' exact component={Shop} />
-                    <Route path='/cart' exact component={Cart} />
                     <Route path='/search' exact component={Search} />
                     <Route path='/men' exact component={Men} />
                     <Route path='/women' exact component={Women} />
+                    <Route path='/checkout' exact component={Cart} />
                     <Route path='/product/:productid' exact component={Product} />
                     <PrivateRoute path='/user/dashboard' exact component={UserDashboard} />
                     <PrivateRoute path='/profile/:userid' exact component={Profile} />

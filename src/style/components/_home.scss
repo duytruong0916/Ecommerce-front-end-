@@ -1,3 +1,12 @@
+.home-wrapper{
+    width: 97%;
+    margin:auto;
+    img{
+        @media (max-width: $desktop-breakpoint) {
+            height: 20vh;
+          }
+    }
+}
 .display-header{
     display: flex;
     justify-content: center;

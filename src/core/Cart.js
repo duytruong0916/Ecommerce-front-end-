@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import Layout from '../core/Layout';
+import React, { useState, useEffect, Fragment } from 'react';
 import { getCart } from '../redux-store/actions/cart';
+import { Redirect } from 'react-router-dom'
 import Card from '../core/Card';
 import { Link } from 'react-router-dom';
 import Checkout from '../core/Checkout';
 const Cart = (props) => {
     const [item, setitem] = useState([]);
     const [run, setrun] = useState(false);
-    const {cartClick} = props;
-    const handleClick = ()=>{
+    const [ready, setready] = useState(false)
+    const { cartClick, isinmenu = false } = props;
+    const handleClick = () => {
         cartClick();
     }
     const getTotal = () => {
@@ -16,12 +17,35 @@ const Cart = (props) => {
             return currentvalue + nextvalue.count * nextvalue.price;
         }, 0)
     }
+    // const DisplayCheckout = ()=>{
+    //     setready(true)
+    // }
+    const NoItemMessage = () => {
+        return (
+            <div>
+                <div className='font-weight-bold p-5'>Your cart is empty!</div>
+                <hr />
+                <div className='row'>
+                    <div className='col-12 mt-5' onClick={handleClick}>
+                        <Link to='/men'><button className='button-card w-50'>SHOP MEN</button></Link>
+                    </div>
+                    <div className='col-12 mt-5 mb-5' onClick={handleClick}>
+                        <Link to='/women'><button className='button-card w-50'>SHOP MEN</button></Link>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+    useEffect(() => {
+        setitem(getCart());
+    }, [run, props])
+
     const ShowItem = () => {
         return (
             <div>
-                <div className ='font-weight-bold p-5'>Your cart has {`${item.length}`} items</div>
+                <div className='font-weight-bold p-5'>Your cart has {`${item.length}`} items</div>
                 <hr />
-                <div className='row'>
+                <div className='row card-item-shower'>
                     {item.map((p, i) => (
                         <div className='col-6' key={i}>
                             <Card product={p} showaddtocartbutton={false} showQuantity={false} showviewbutton={false} cartupdate={true} showremovebutton={true} run={run} setrun={setrun} />
@@ -32,46 +56,34 @@ const Cart = (props) => {
             </div>
         )
     }
-    const NoItemMessage = () => {
+    const ShowCart = () => {
         return (
-            <div>
-                <div className ='font-weight-bold p-5'>Your cart is empty!</div>
-                <hr />
-                <div className='row'>
-                    <div className='col-12 mt-5' onClick = {handleClick}>
-                        <Link to ='/men'><button className ='button-card w-50'>SHOP MEN</button></Link>
-                    </div>
-                    <div className='col-12 mt-5 mb-5' onClick = {handleClick}>
-                      <Link to ='/women'><button className ='button-card w-50'>SHOP MEN</button></Link>
+            <Fragment>
+                <div>
+                    <div>
+                        {item.length > 0 ? ShowItem(item) : NoItemMessage()}
                     </div>
                 </div>
-            </div>
+                    {item.length > 0 && (
+                        <div className='w-100 mt-5'>
+                            <div>
+                                <span>Subtotal:</span>
+                                <span className='font-weight-bold'> ${getTotal()}</span>
+                            </div>
+                            <div>
+                                <span>Shipping: </span>
+                                <span className='font-weight-bold'>FREE</span>
+                            </div>
+                            {isinmenu && <Link to='/checkout' onClick={handleClick}><button className='button-card bg-success mt-2 p-4 font-weight-bold'>CHECKOUT</button></Link>}
+                        </div>)}
+            </Fragment>
         )
     }
-    useEffect(() => {
-        setitem(getCart());
-    }, [run, props])
-
     return (
-        <Layout title='Shopping cart' description='Manage you cart items' className='container-fluid'>
-            <div className = 'card-item-shower'>
-                {item.length > 0 ? ShowItem(item) : NoItemMessage()}
-            </div>
-            <div className = 'mt-5'>
-                 {item.length > 0 &&(
-                 <div className='border'>
-                     <div>
-                         <span>Subtotal:</span> 
-                         <span className='font-weight-bold'> ${getTotal()}</span>
-                    </div>
-                     <div>
-                         <span>Shipping: </span>
-                         <span className='font-weight-bold'>FREE</span>
-                    </div>
-                     <button className = 'button-card mt-2'>CHECK OUT</button>
-                 </div>)}
-            </div>
-        </Layout>
+        <div className='cart-wrapper'>
+            {isinmenu && ShowCart()}
+            {!isinmenu&& <Checkout products={item} run={run} setrun={setrun} />}
+        </div>
     )
 }
 export default Cart;

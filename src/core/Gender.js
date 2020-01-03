@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import Layout from '../core/Layout';
-import { Link, Redirect } from 'react-router-dom';
+import Carousel from '../core/Carousel';
 import { getProductByCategory } from '../redux-store/actions/product';
 import { getCategory } from '../redux-store/actions/admin';
 import Card from '../core/Card';
@@ -149,6 +148,7 @@ const Gender = ({ ismen = false, iswomen = false, isaccessories }) => {
     )
     return (
         <div>
+            <Carousel />
             {ismen&&<div className ='poster-men w-100'></div>}
             {iswomen&&<div className ='poster-women'></div>}
             <div className='row'>

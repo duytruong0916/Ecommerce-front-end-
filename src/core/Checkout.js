@@ -1,25 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
+import CheckoutForm from '../user/CheckoutForm';
+import ShowImage from "../core/ShowImage";
+import Signin from '../user/Signin';
+import Carousel from '../core/Carousel';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { getBraintreeClientToken, processPayment } from '../redux-store/actions/product';
-import {createOrder} from '../redux-store/actions/order';
-import {EmptyCart}  from '../redux-store/actions/cart';
+import { createOrder } from '../redux-store/actions/order';
+import { EmptyCart } from '../redux-store/actions/cart';
+import { startCheckout, FinishedCheckout } from '../redux-store/actions/auth';
 import DropIn from 'braintree-web-drop-in-react'
-const Checkout = ({EmptyCart, products, islogin, user,  run =undefined, setrun =f =>f}) => {
+const Checkout = (props) => {
+    const { FinishedCheckout, Checkout, EmptyCart, products, islogin, user, run = undefined, setrun = f => f } = props
     const [data, setdata] = useState({
-        loading:false,
-        success:false,
+        loading: false,
+        success: false,
         clientToken: null,
         error: '',
         instance: {},
-        address: ''
+        information: {},
+        ready: true,
+        Shouldredirect: false
     })
-    const getToken =(userid,token)=>{
-        getBraintreeClientToken(userid, token).then((response)=>{
-            if(response.error){
-                setdata({...data, error:response.error})
-            }else{
-                setdata({clientToken: response.clientToken})
+    const { information, ready, loading, success, Shouldredirect } = data;
+    useEffect(() => {
+        if (user) {
+            getToken(user.user._id, user.token);
+        }
+
+    }, [props])
+    const handleForm = (infor) => {
+        Checkout();
+        setdata({ ...data, information: infor, ready: true });
+    }
+    const getToken = (userid, token) => {
+        getBraintreeClientToken(userid, token).then((response) => {
+            if (response.error) {
+                setdata({ ...data, error: response.error })
+            } else {
+                setdata({ clientToken: response.clientToken })
             }
         })
     }
@@ -29,103 +48,139 @@ const Checkout = ({EmptyCart, products, islogin, user,  run =undefined, setrun =
         }, 0)
     }
     const ShowCheckout = () => (
-            islogin ? (
-                <div>{ShowDropIn()}</div>
-            ) : (
-                    <Link to='/signin'>Log in to check out</Link>
-                )
+        islogin ? (
+            <div>{ShowDropIn()}</div>
+        ) : (
+                <div>
+                    <div>Log in to check out</div>
+                    <Signin />
+                </div>
+            )
     )
-    let deliveraddress =data.address;
-    const Pay =(e)=>{
-        setdata({loading:true})
-        //nonce = data.instance.requestPaymentMethod()
+    const ShouldRedirect = (Should) => (
+        Should && <Redirect to='/home' />
+    )
+    const Pay = (e) => {
+        e.preventDefault();
+        setdata({ ...data, loading: true })
         let nonce;
-        data.instance.requestPaymentMethod().then(data=>{
-            //console.log(data);
+        data.instance.requestPaymentMethod().then(data => {
             nonce = data.nonce;
-            //console.log("send nonce and total to the process", nonce, getTotal(products))
             const paymentdata = {
                 paymentMethodNonce: nonce,
                 amount: getTotal(products)
             }
             processPayment(user.user._id, user.token, paymentdata)
-            .then((response)=>{
-                    if(response.error){
-                        setdata({loading:false, error: response.message? response.message: response.error})
-            
-                    }else{
+                .then((response) => {
+                    if (response.error) {
+                        setdata({ loading: false, error: response.message ? response.message : response.error })
+                    } else {
                         //send order to the backend
-                        console.log(response)
+                        // console.log(response)
                         const orderdata = {
                             products: products,
                             trasaction_id: response.transaction.id,
-                            amount: response.transaction.amount, 
-                            address: deliveraddress
+                            amount: response.transaction.amount
                         }
-                        createOrder(user.user._id, user.token,orderdata).then(response =>{
+                        createOrder(user.user._id, user.token, orderdata).then(response => {
                             //sent successfully and empty cart
-                            EmptyCart()
-                            console.log('Payment Success and empty cart')
-                            setdata({loading:false, success:true});
-                            run = true;
-                            setrun(run);
-                        }).catch(err=>{
+                            console.log('Payment Success and empty cart');
+                            setrun(true);
+                            EmptyCart();
+                            setdata({ loading: false, success: true, ready: false });
+                            FinishedCheckout()
+                        }).catch(err => {
                             console.log(err)
                         })
-                     
+
                     };
-            });
-        }).catch(err =>{
-            setdata({...data, error: err.message});
+                });
+        }).catch(err => {
+            setdata({ ...data, error: err.message });
         });
     };
-    const handleAddreschange = e =>{
-         setdata({...data, address: e.target.value});
+    const handleAddreschange = e => {
+        setdata({ ...data, address: e.target.value });
     }
-    const ShowDropIn = ()=>(
-        <div onBlur = {()=> setdata({...data, error: ''})}>
-            {data.clientToken !==null&&products.length > 0 ? (
+    const ShowDropIn = () => (
+        <div onBlur={() => setdata({ ...data, error: '' })}>
+            {data.clientToken !== null && products.length > 0 ? (
                 <div>
-                    <div className ='form-group mb-3'>
-                        <label className='text-muted'>Delivery Address:</label>
-                        <textarea 
-                            onChange= {handleAddreschange}
-                            value= {data.address}
-                            placeholder ='Enter your delivery address...'
-                            className ='form-control'/>
+                    <div style={{ zIndex: '-1' }}>
+                        <DropIn
+                            options={{ authorization: data.clientToken, paypal: { flow: 'vault' } }}
+                            onInstance={instance => data.instance = instance} />
+                        <button className='button bg-success w-50' onClick={Pay}>Submit</button>
                     </div>
-                    <DropIn 
-                    options={{ authorization: data.clientToken ,paypal: {flow: 'vault'}}} 
-                    onInstance= {instance => data.instance =instance}/>
-                    <button className='button btn-success w-50' onClick={Pay}>Submit</button>
                 </div>
-            ):null}
+            ) : null}
         </div>
     )
-    const ShowError = (error) =>(
-        <div className ='alert alert-danger' style = {{display: error? '': 'none' }}>
+    const ShowError = (error) => (
+        <div className='alert alert-danger' style={{ display: error ? '' : 'none' }}>
             {error}
         </div>
     )
-    const ShowMessage = (success) =>(
-        <div className ='alert alert-success' style = {{display: success? '': 'none' }}>
+    const ShowMessage = (success) => (
+        <div className='alert alert-success text-center' style={{ display: success ? '' : 'none' }}>
             Thanks! Your payment was successful.
         </div>
     )
-    const ShowLoading = (loading) =>(loading&&<h2>Loading.....</h2>)
-    useEffect(()=>{
-        if(user){
-            getToken(user.user._id, user.token)
-        }
-       
-    },[])
+    const ShowLoading = (loading) => (loading && <h2>Loading.....</h2>)
     return (
         <div>
-            <h2>Total: ${getTotal()}</h2>
-            {ShowLoading(data.loading)}
-            {ShowError(data.error)}
-            {ShowMessage(data.success)}
-            {ShowCheckout()}
+            <Carousel />
+            <div className='row checkout-wrapper'>
+                {/* {ShouldRedirect(Shouldredirect)} */}
+                <div className='col-lg-5 col-12 mt-5'>
+                    <div className='item-list'>
+                        {products.map((p, i) => (
+                            <div className='row' key={i}>
+                                <div className='col-3 pl-5 pt-3'><ShowImage product={p} url="product" /></div>
+                                <div className='col-6 pt-5 font-weight-bold'>
+                                    <div>{p.name}</div>
+                                    <div>{p.description}</div>
+                                </div>
+                                <div className='col-3 pt-5 text-danger font-weight-bold'>${p.price}</div>
+                            </div>
+                        ))}
+                    </div>
+                    <hr className=' mt-5' />
+                    <div className='w-75 mx-auto mt-5'>
+                        <div className='d-flex flex-row justify-content-between mt-3'>
+                            <span className=''>Subtotal</span><span>${getTotal()}</span>
+                        </div>
+                        <div className='d-flex flex-row justify-content-between mt-3'>
+                            <span className=''>Discount</span><span>25% OFF: ${getTotal() * 25 / 100}</span>
+                        </div>
+                        <div className='d-flex flex-row justify-content-between mt-3'>
+                            <span className=''>Shipping</span><span>Free</span>
+                        </div>
+                        <div className='d-flex flex-row justify-content-between mt-3'>
+                            <span className=''>Tax</span><span>: ${(getTotal() * 8.25 / 100).toFixed(2)}</span>
+                        </div>
+                        <hr />
+                        <div className='d-flex flex-row justify-content-between mt-5'>
+                            <span className='font-weight-bold'>Total</span><span>USD <span style={{ fontSize: '40px' }}>{(getTotal() - (getTotal() * 25 / 100) + (getTotal() * 8.25 / 100)).toFixed(2)}</span></span>
+                        </div>
+                    </div>
+                    <div className='text-center mb-5'>
+                        <Link to='/shop'>
+                            <button className='button-card w-75 mt-5 p-md-5 p-4' onClick={() => FinishedCheckout()}>ADD MORE ITEM</button>
+                        </Link>
+                    </div>
+                </div>
+                <div className='col-lg-7 col-12 border mt-lg-5 mt-3'>
+                    {ShowMessage(success)}
+                    {!ready && <CheckoutForm handleForm={(data) => handleForm(data)} />
+                    }
+                    {ready && <div className=''>
+                        {ShowLoading(loading)}
+                        {ShowError(data.error)}
+                        {ShowCheckout()}
+                    </div>}
+                </div>
+            </div>
         </div>
 
     )
@@ -135,6 +190,8 @@ const mapStatetoProps = (state) => ({
     user: state.auth.user
 })
 const mapDispatchToProps = (dispatch) => ({
-    EmptyCart: () => dispatch(EmptyCart())
+    EmptyCart: () => dispatch(EmptyCart()),
+    Checkout: () => dispatch(startCheckout()),
+    FinishedCheckout: () => dispatch(FinishedCheckout())
 });
-export default connect(mapStatetoProps,mapDispatchToProps )(Checkout); 
+export default connect(mapStatetoProps, mapDispatchToProps)(Checkout); 

@@ -30,6 +30,15 @@
     height: $xxl-size;
 
 }
+.profile_image_checkout{
+  width: $xl-size;
+  height: $xl-size;
+  margin: auto;
+  @media (min-width: $desktop-breakpoint) {
+    width: $xxl-size;
+    height: $xxl-size;
+  }
+}
 .profile_name{
   color: $off-white;
   font-size: $font-size-title;
@@ -115,6 +124,7 @@
   @media (min-width: $desktop-breakpoint) {
     right: 0;
     top: 0;
+    max-width: 100%;
     min-width: 30%;
 }
 }

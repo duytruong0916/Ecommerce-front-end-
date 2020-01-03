@@ -2,7 +2,8 @@ const defaultState = {
   userrole: 0,
   user: undefined,
   authError: null,
-  resetError: null
+  resetError: null,
+  checkout: false
 }
 export default (state = defaultState, action) => {
   switch (action.type) {
@@ -38,6 +39,18 @@ export default (state = defaultState, action) => {
         ...state,
         authError: action.msg
       }
+    case 'CHECK_OUT':
+      console.log('start to checkout')
+      return {
+        ...state,
+        checkout: true
+      }
+      case 'FINISH_CHECK_OUT':
+        console.log('finsied to checkout')
+        return {
+          ...state,
+          checkout: false
+        }
     case 'RESET_SUCCESS':
       console.log('An email was sent to your email to reset the password')
       return {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import Layout from '../core/Layout';
+import Carousel from '../core/Carousel';
 import { Link, Redirect } from 'react-router-dom';
 import { getProductByCategory } from '../redux-store/actions/product';
 import { getCategory } from '../redux-store/actions/admin';
@@ -91,7 +91,11 @@ const Home = () => {
 
     }
     return (
-        <Layout title='Home Page' description='App Node-React'>
+        <div className='home-wrapper'>
+            <Carousel />
+            <div>
+                <img src='asset\carousel.jpg' className='w-100'/>
+            </div>
             <div className='d-md-none d-flex text-center small'>
                 <Link to='/men' className='bg-light w-50 p-3 border font-weight-bold unlink'>
                     <span >SHOP NEW MENS</span>
@@ -103,8 +107,7 @@ const Home = () => {
             {ShowPoster(productsMen, 'BE A GENTLEMAN', 'home-poster-men')}
             {ShowSignUp()}
             {ShowPoster(productsWomen, 'BE GORGEOUS', 'home-poster-women')}
-
-        </Layout>
+        </div>
     )
 }
 export default Home;
