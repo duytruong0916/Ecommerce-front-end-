@@ -1,7 +1,7 @@
 .home-wrapper{
     width: 97%;
     margin:auto;
-    img{
+    .image-home{
         @media (max-width: $desktop-breakpoint) {
             height: 20vh;
           }

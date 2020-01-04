@@ -80,7 +80,7 @@ const Search = () => {
                     <div className ='w-100'>
                         <input
                             type='search'
-                            className='search-form input-text'
+                            className='input-text w-75 p-4'
                             placeholder='Search by name'
                             onChange={handleChange('search')} />
                     </div>

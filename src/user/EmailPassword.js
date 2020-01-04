@@ -72,7 +72,7 @@ class EmailPasswordPage extends React.Component {
              {this.props.AuthError&&!this.state.error? <p>{this.props.AuthError}</p>: null}
              {this.state.error && <p>{this.state.error}</p>}
           </div>
-          <button className='button mt-4 w-50'>Next</button>
+          <button className='button mt-4 w-50 p-4'>NEXT</button>
           <div className='mt-3'><NavLink to="/resetpassword" className='new-link-color'>I've forgotten my password</NavLink></div>
        </form>
      </div>

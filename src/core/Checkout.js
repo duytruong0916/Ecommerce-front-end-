@@ -52,8 +52,8 @@ const Checkout = (props) => {
             <div>{ShowDropIn()}</div>
         ) : (
                 <div>
-                    <div>Log in to check out</div>
-                    <Signin />
+                    <div className = 'page-header-title text-center mt-5'>LOGIN TO CHECKOUT</div>
+                    <Signin incheckout ={true}/>
                 </div>
             )
     )
@@ -106,7 +106,8 @@ const Checkout = (props) => {
         <div onBlur={() => setdata({ ...data, error: '' })}>
             {data.clientToken !== null && products.length > 0 ? (
                 <div>
-                    <div style={{ zIndex: '-1' }}>
+                    <div className= 'font-weight-bold mt-4' style={{fontSize: '20px'}}>*Card number:  4111-1111-1111-1111 for testing</div>
+                    <div className= 'mt-4'>
                         <DropIn
                             options={{ authorization: data.clientToken, paypal: { flow: 'vault' } }}
                             onInstance={instance => data.instance = instance} />

@@ -1,5 +1,5 @@
 .navbar {
-  background-color: black;
+  background-color: $off-white;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -40,7 +40,7 @@
   }
 }
 .profile_name{
-  color: $off-white;
+  color: $dark-black;
   font-size: $font-size-title;
   letter-spacing: $xxs-size;
   font-family: $fancy-font;
@@ -49,7 +49,7 @@
   }
 }
 .navbar-collapse{
-  background-color: #212529;
+  background-color:$off-white;
   text-align: center;
 }
 .navbar-collapse, .navbar-toggle {
@@ -83,13 +83,15 @@
   }
   &:hover {
     text-decoration: none;
-    color: $off-white;
+    color: $dark-black;
+    font-weight: 600;
     padding: $xs-size 0;
   }
 }
 .is-active {
-  color: $off-white;
+  color: $dark-black;
   padding: $xs-size 0;
+  font-weight: 600;
   @media (min-width: $desktop-breakpoint) {
     border-bottom: $off-white solid 0.5px;
 }
@@ -97,7 +99,7 @@
 
 .fa {
   outline: none;
-  color: white;
+  color: $dark-black;
   border: none;
   font-size: $mx-size;
   background-color: none;
@@ -130,7 +132,7 @@
 }
 .modal-header{
   background-color: black;
-  color: $off-white;
+  color: $dark-black;
   .modal-title{
     margin:auto;
     font-weight: 500;

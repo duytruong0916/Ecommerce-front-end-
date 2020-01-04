@@ -59,21 +59,21 @@ export class SignUpForm extends React.Component {
         return (
             <div>
                 <form onSubmit={this.onSubmit}>
-                    <div className='section-1'>
+                    <div className='mt-4'>
                         <div>
-                            <span className="font-weight-bold">First name:</span>
+                        <div><span className="font-weight-bold">First name:</span></div>
                             <input
-                                className='text-input w-75 ml-4'
+                                className='text-input w-100 ml-2'
                                 id='fistname'
                                 type='text'
                                 placeholder='First name'
                                 value={this.state.firstname}
                                 onChange={this.onFirstNameChange} />
                         </div>
-                        <div>
-                            <span className="font-weight-bold">Last name:</span>
+                        <div className='mt-4'>
+                            <div><span className="font-weight-bold">Last name:</span></div>
                             <input
-                                className='text-input w-75 ml-4 mt-4'
+                                className='text-input w-100 ml-2'
                                 id='lastname'
                                 type='text'
                                 placeholder='Last name'
@@ -81,30 +81,30 @@ export class SignUpForm extends React.Component {
                                 onChange={this.onLastNameChange} />
                         </div>
                     </div>
-                    <div>
+                    <div className='mt-4'>
                         <div><span className="font-weight-bold">Email:</span></div>
                         <input
-                            className={`login_input w-100 login_input ml-2 ${this.state.error || this.props.AuthError ? 'login_invalid_input' : ''}`}
+                            className={`text-input w-100 text-input ml-2 ${this.state.error || this.props.AuthError ? 'login_invalid_input' : ''}`}
                             id='email'
                             type='email'
                             placeholder='Email'
                             value={this.state.email}
                             onChange={this.onEmailChange} />
                     </div>
-                    <div>
+                    <div className='mt-4'>
                         <div><span className="font-weight-bold">Password:</span></div>
                         <input
-                            className={`login_input w-100 login_input ml-2 ${this.state.error || this.props.AuthError ? 'login_invalid_input' : ''}`}
+                            className={`text-input w-100 text-input ml-2 ${this.state.error || this.props.AuthError ? 'login_invalid_input' : ''}`}
                             id='password'
                             type='password'
                             placeholder='Password'
                             value={this.state.password}
                             onChange={this.onPasswordChange} />
                     </div>
-                    <div>
+                    <div className='mt-4'>
                         <div><span className="font-weight-bold">Confirm Password</span></div>
                         <input
-                            className={`login_input w-100 login_input ml-2 ${this.state.error || this.props.AuthError ? 'login_invalid_input' : ''}`}
+                            className={`text-input w-100 text-input ml-2 ${this.state.error || this.props.AuthError ? 'login_invalid_input' : ''}`}
                             id='confirm_password'
                             type='password'
                             placeholder='Confirm password'
@@ -115,7 +115,7 @@ export class SignUpForm extends React.Component {
                         {this.props.signupError && !this.state.error ? <p>{this.props.signupError}</p> : null}
                         {this.state.error && <p>{this.state.error}</p>}
                     </div>
-                    <button className="button mt-3 w-100">Submit & Log In</button>
+                    <button className="button mt-3 w-100 p-lg-5 p-4" style={{fontSize:'16px'}}>Submit & Log In</button>
                 </form>
 
             </div>

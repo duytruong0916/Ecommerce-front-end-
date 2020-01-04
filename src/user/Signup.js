@@ -7,7 +7,7 @@ const Signup = () => {
         <Layout title='Signup Page' description='App Node-React'>
             <div className='login_wrapper'>
                 <div className="login_box">
-                    <h1 className='login_title text-center font-weight-bold'>Register</h1>
+                    <h1 className='page-header-title text-center'>CREATE AN ACCOUNT</h1>
                     <SignUpForm  />
                 </div>
             </div>

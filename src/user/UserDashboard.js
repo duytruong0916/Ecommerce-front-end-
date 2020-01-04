@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import Layout from '../core/Layout';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { getPurchaseHistory } from '../redux-store/actions/user';
-import { startLogOut } from '../redux-store/actions/auth';
-import moment from 'moment';
-const UserDashboard = (props) => {
+import React, { useState, useEffect, Fragment } from "react";
+import ShowImage from "../core/ShowImage";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { getPurchaseHistory } from "../redux-store/actions/user";
+import { startLogOut } from "../redux-store/actions/auth";
+import moment from "moment";
+const UserDashboard = props => {
     const [purchasehistoy, setpurchasehistory] = useState([]);
     const { _id, name, email, role } = props.userinfor.user;
     const loadPurchaseHistory = (userid, token) => {
@@ -15,93 +15,80 @@ const UserDashboard = (props) => {
             } else {
                 setpurchasehistory(data);
             }
-        })
-    }
+        });
+    };
     const userLink = () => {
         return (
-            <div className='card mb-3'>
-                <h3 className='card-header'>User actions</h3>
-                <ul className='list-group'>
-                    <li className='list-group-item'>
-                        <Link to='/cart'>View Cart</Link>
+            <div className="card mb-3">
+                <div className="page-header-title text-center text-danger">PROFILE</div>
+                <ul className="list-group">
+                    <li className="list-group-item"><span className='font-weight-bold'>Name:</span> {name}</li>
+                    <li className="list-group-item"><span className='font-weight-bold'>Email:</span> {email}</li>
+                    <li className="list-group-item"><span className='font-weight-bold'>Role:</span> {role === 1 ? "Admin" : "User"}</li>
+                    <li className="list-group-item text-center mt-4">
+                        <Link to={`/profile/${_id}`}>
+                            <button className="button-card p-4">EDIT PROFILE</button>
+                        </Link>
                     </li>
-                    <li className='list-group-item'>
-                        <Link to={`/profile/${_id}`}>Edit Profile</Link>
-                    </li>
-                    <li className='list-group-item text-danger' style={{cursor: 'pointer'}}>
-                         <span onClick={() => props.startLogout()}>Log out</span>
+                    <li
+                        className="list-group-item text-center mt-2"
+                        style={{ cursor: "pointer" }}>
+                        <button className="button-card p-4" onClick={() => props.startLogout()}>LOG OUT</button>
+
                     </li>
                 </ul>
             </div>
-        )
-    }
-    const userInfo = () => {
-        return (
-            <div className='card mb-5 container'>
-                <h3 className='card-header'>User Information</h3>
-                <ul className='list-group'>
-                    <li className='list-group-item'>{name}</li>
-                    <li className='list-group-item'>{email}</li>
-                    <li className='list-group-item'>{role === 1 ? 'Admin' : 'User'}</li>
-                </ul>
-            </div>
-        )
-    }
+        );
+    };
     const purchaseHistory = history => {
         return (
-            <div className="card mb-5">
-                <h3 className="card-header">Purchase history</h3>
-                <ul className="list-group">
-                    <li className="list-group-item">
-                        {purchasehistoy.map((h, i) => {
-                            return (
-                                <div key={i}>
-                                    <hr />
-                                    {h.products.map((p, i) => {
-                                        return (
-                                            <div key={i}>
+            <div className="mb-5 p-5">
+                <div className='page-header-title text-center text-danger'>PURCHASE HISTORY</div>
+                {purchasehistoy.length<1?<div className='text-center mt-5 text-danger'>YOU HAVE NO ORDER</div>:purchasehistoy.map((h, i) => {
+                    return (
+                        <div key={i}>
+                            <hr />
+                            <div className='page-header-title'>ORDER {i + 1}</div>
+                            {h.products.map((p, i) => {
+                                return (
+                                    <div className='row p-5' key={i}>
+                                            <div className='col-5 col-md-2 pl-5 pt-3'><ShowImage product={p} url="product" /></div>
+                                            <div className='col-6 col-md-10 font-weight-bold'>
                                                 <h5>Product name: {p.name}</h5>
                                                 <h5>Product price: ${p.price}</h5>
-                                                <h5>
-                                                    Purchased date:{" "}
-                                                    {moment(p.createdAt).fromNow()}
-                                                </h5>
+                                                <h5>Purchased date: {moment(p.createdAt).format("MMM Do YY")}</h5>
                                             </div>
-                                        );
-                                    })}
-                                </div>
-                            );
-                        })}
-                    </li>
-                </ul>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    );
+                })}
             </div>
         );
     };
 
     useEffect(() => {
         loadPurchaseHistory(props.userinfor.user._id, props.userinfor.token);
-    }, [])
+    }, []);
     return (
-        <Layout title='UserDashbard' description={`Hello ${name}`} className='containrt-fluid'>
-            <div className='row'>
-                <div className='col-md-4 '>
-                    {userLink()}
-                </div>
-                <div className='col-md-8'>
-                    {userInfo()}
-                    {purchaseHistory()}
+        <Fragment>
+            <div className="row">
+                <div className="col-md-5 col-12 p-5">{userLink()}</div>
+                <div 
+                     className={`${purchasehistoy.length>=1?'purchase-wrapper':''} col-md-7 col-12 `}>
+                        {purchaseHistory()}
                 </div>
             </div>
-        </Layout>
-    )
-}
+        </Fragment>
+    );
+};
 
-
-const MapStateToProps = (state) => ({
+const MapStateToProps = state => ({
     islogin: !!state.auth.user,
-    userinfor: state.auth.user,
-})
-const mapDispatchToProps = (dispatch) => ({
+    userinfor: state.auth.user
+});
+const mapDispatchToProps = dispatch => ({
     startLogout: () => dispatch(startLogOut())
 });
-export default connect(MapStateToProps,mapDispatchToProps)(UserDashboard);
+export default connect(MapStateToProps, mapDispatchToProps)(UserDashboard);
