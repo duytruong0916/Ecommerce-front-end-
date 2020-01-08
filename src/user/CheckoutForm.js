@@ -63,7 +63,7 @@ const CheckoutForm = ({handleForm}) => {
                     </div>
                     <div>
                         <select onChange={onChangeHandler('state')} className='text-input w-100 ml-4'>
-                            <option>State</option>
+                            <option>SELECT A STATE</option>
                             {states.map((st, i) => (
                                 <option key={i} value={st}>{st}</option>
                             ))}

@@ -1,14 +1,5 @@
 @import  '../base/settings';
 
-.page-header{
-    background-color: $off-white;
-    margin-bottom: $m-size;
-    padding: $m-size 0;
-    @media (min-width: $desktop-breakpoint){
-        margin-bottom: $l-size;
-        padding: $l-size 0;
-    }
-}
 .page-header-title{
     font-size: $mx-size;
     font-weight: 700;

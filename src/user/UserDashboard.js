@@ -20,7 +20,7 @@ const UserDashboard = props => {
     const userLink = () => {
         return (
             <div className="card mb-3">
-                <div className="page-header-title text-center text-danger">PROFILE</div>
+                <div className="page-header-title text-center p-5">PROFILE</div>
                 <ul className="list-group">
                     <li className="list-group-item"><span className='font-weight-bold'>Name:</span> {name}</li>
                     <li className="list-group-item"><span className='font-weight-bold'>Email:</span> {email}</li>
@@ -43,7 +43,7 @@ const UserDashboard = props => {
     const purchaseHistory = history => {
         return (
             <div className="mb-5 p-5">
-                <div className='page-header-title text-center text-danger'>PURCHASE HISTORY</div>
+                <div className='page-header-title text-center'>PURCHASE HISTORY</div>
                 {purchasehistoy.length<1?<div className='text-center mt-5 text-danger'>YOU HAVE NO ORDER</div>:purchasehistoy.map((h, i) => {
                     return (
                         <div key={i}>
@@ -52,8 +52,8 @@ const UserDashboard = props => {
                             {h.products.map((p, i) => {
                                 return (
                                     <div className='row p-5' key={i}>
-                                            <div className='col-5 col-md-2 pl-5 pt-3'><ShowImage product={p} url="product" /></div>
-                                            <div className='col-6 col-md-10 font-weight-bold'>
+                                            <div className='col-5 col-md-3 offset-md-3 pl-5 pt-3'><ShowImage product={p} url="product" /></div>
+                                            <div className='col-6 col-md-6 font-weight-bold'>
                                                 <h5>Product name: {p.name}</h5>
                                                 <h5>Product price: ${p.price}</h5>
                                                 <h5>Purchased date: {moment(p.createdAt).format("MMM Do YY")}</h5>

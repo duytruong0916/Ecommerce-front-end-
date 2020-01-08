@@ -3,19 +3,19 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 const Footer = (props) => {
     const ShowFooter = ()=>(
-        <div className='footer-wrapper'>
+        <div className='footer-wrapper mt-4'>
         <div className='row'>
             <div className='col-md-4 col-12 p-5'>
-                <div className='w-100 mt-3 profile_name text-center'>TIMEFOX</div>
+                <div className='w-100 mt-3 profile_name text-center text-white'>TIMEFOX</div>
                 <div className='w-md-75 ml-md-5 mt-3'>For happy hour sales, new product releases & behind the scenes access.</div>
                 <div className='text-center' >
                     <Link to='/signup'><button className='button w-100 ml-md-5 mt-5' >JOIN US</button></Link>
                 </div>
                 <div className='text-center'>
-                    <span><a className="fa fa-facebook mt-5 pr-4" href="#"></a></span>
-                    <span><a className="fa fa-twitter mt-5 pr-2" href="#"></a></span>
-                    <span> <a className="fa fa-instagram mt-5 pl-2" href="#"></a></span>
-                    <span> <a className="fa fa-youtube  mt-5 pl-4" href="#"></a></span>
+                    <span><a className="fa fa-facebook mt-5 pr-4 text-white" href="#"></a></span>
+                    <span><a className="fa fa-twitter mt-5 pr-2 text-white" href="#"></a></span>
+                    <span> <a className="fa fa-instagram mt-5 pl-2 text-white" href="#"></a></span>
+                    <span> <a className="fa fa-youtube  mt-5 pl-4 text-white" href="#"></a></span>
                 </div>
                 <div className='w-100 ml-md-5 mt-5 text-center'>support@timefoxwatches.com</div>
             </div>
@@ -31,7 +31,7 @@ const Footer = (props) => {
                 <div>
                     <div  className='text-danger footer-subtile'>DISCOVER</div>
                     <div >
-                         <div className='p-2'><Link to='/' className='unlink-text'>About</Link></div>
+                         <div className='p-2'><Link to='/about' className='unlink-text'>About</Link></div>
                         <div className='p-2'><Link to='/' className='unlink-text'>Stories</Link></div>
                     </div>
                 </div>
@@ -40,6 +40,8 @@ const Footer = (props) => {
                     <div >
                         <div className='p-2'><Link to='/' className='unlink-text'>FAQs</Link></div>
                         <div className='p-2'><Link to='/' className='unlink-text'>Contact</Link></div>
+                        <div className='p-2'><Link to='/' className='unlink-text'>Shipping</Link></div>
+                        <div className='p-2'><Link to='/' className='unlink-text'>Returns</Link></div>
                     </div>
                 </div>
 
@@ -56,7 +58,7 @@ const Footer = (props) => {
                 <div className="text-danger text-center">
                     <div className="footer-toggle p-3" data-toggle="collapse" data-target="#discover">DISCOVER</div>
                     <div className="collapse footer-collapse" id="discover">
-                        <div className='p-2'><Link to='/' className='unlink-text'>About</Link></div>
+                        <div className='p-2'><Link to='/about' className='unlink-text'>About</Link></div>
                         <div className='p-2'><Link to='/' className='unlink-text'>Stories</Link></div>
                     </div>
                 </div>

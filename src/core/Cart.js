@@ -1,12 +1,11 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { getCart } from '../redux-store/actions/cart';
-import { Redirect } from 'react-router-dom'
+import { connect } from "react-redux";
 import Card from '../core/Card';
 import { Link } from 'react-router-dom';
 import Checkout from '../core/Checkout';
 const Cart = (props) => {
     const [item, setitem] = useState([]);
-    const [run, setrun] = useState(false);
     const [ready, setready] = useState(false)
     const { cartClick, isinmenu = false } = props;
     const handleClick = () => {
@@ -38,7 +37,7 @@ const Cart = (props) => {
     }
     useEffect(() => {
         setitem(getCart());
-    }, [run, props])
+    }, [props])
 
     const ShowItem = () => {
         return (
@@ -48,7 +47,7 @@ const Cart = (props) => {
                 <div className='row card-item-shower'>
                     {item.map((p, i) => (
                         <div className='col-6' key={i}>
-                            <Card product={p} showaddtocartbutton={false} showQuantity={false} showviewbutton={false} cartupdate={true} showremovebutton={true} run={run} setrun={setrun} />
+                            <Card product={p} showaddtocartbutton={false} showQuantity={false} showviewbutton={false} cartupdate={true} showremovebutton={true} />
                         </div>
 
                     ))}
@@ -82,8 +81,12 @@ const Cart = (props) => {
     return (
         <div className='cart-wrapper'>
             {isinmenu && ShowCart()}
-            {!isinmenu&& <Checkout products={item} run={run} setrun={setrun} />}
+            {!isinmenu&& <Checkout products={item}/>}
         </div>
     )
 }
-export default Cart;
+const mapStatetoProps = state => ({
+    numberOfItem: state.cart.item
+});
+
+export default connect(mapStatetoProps)(Cart);

@@ -22,10 +22,10 @@ import Search from '../core/Search';
 import ManageCategory from '../admin/ManageCategory';
 import Footer from '../core/footer';
 import ScrollToTop from '../route/ScrollToTop';
-
 import Men from '../core/Men';
 import Women from '../core/Women';
 import Checkout from '../core/Checkout';
+import About from '../others/About';
 export const history = createHistory();
 const Routes = () => {
     return (
@@ -41,6 +41,7 @@ const Routes = () => {
                     <Route path='/home' exact component={Home} />
                     <Route path='/shop' exact component={Shop} />
                     <Route path='/search' exact component={Search} />
+                    <Route path='/about' exact component={About} />
                     <Route path='/men' exact component={Men} />
                     <Route path='/women' exact component={Women} />
                     <Route path='/checkout' exact component={Cart} />

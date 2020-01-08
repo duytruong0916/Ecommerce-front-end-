@@ -1,12 +1,4 @@
-.home-wrapper{
-    width: 97%;
-    margin:auto;
-    .image-home{
-        @media (max-width: $desktop-breakpoint) {
-            height: 20vh;
-          }
-    }
-}
+
 .display-header{
     display: flex;
     justify-content: center;
@@ -18,6 +10,17 @@
         font-size: $font-size-large;
       }
 }
+// .home-poster-women-double{
+//     width: 100%;
+//     height: 80vh;
+//     background-image: url('/asset/women.jpg');
+//     background-size: cover;
+
+// }
+// .home-poster-men-doulbe{
+//     @extend .home-poster-men-doulbe;
+//     background-image: url('/asset/men.jpg');
+// }
 .home-poster-women{
     width: 100%;
     height: 80vh;

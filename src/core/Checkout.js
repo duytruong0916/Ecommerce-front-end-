@@ -11,7 +11,7 @@ import { EmptyCart } from '../redux-store/actions/cart';
 import { startCheckout, FinishedCheckout } from '../redux-store/actions/auth';
 import DropIn from 'braintree-web-drop-in-react'
 const Checkout = (props) => {
-    const { FinishedCheckout, Checkout, EmptyCart, products, islogin, user, run = undefined, setrun = f => f } = props
+    const { FinishedCheckout, Checkout, EmptyCart, products, islogin, user } = props
     const [data, setdata] = useState({
         loading: false,
         success: false,
@@ -85,7 +85,6 @@ const Checkout = (props) => {
                         createOrder(user.user._id, user.token, orderdata).then(response => {
                             //sent successfully and empty cart
                             console.log('Payment Success and empty cart');
-                            setrun(true);
                             EmptyCart();
                             setdata({ loading: false, success: true, ready: false });
                             FinishedCheckout()
@@ -152,13 +151,13 @@ const Checkout = (props) => {
                             <span className=''>Subtotal</span><span>${getTotal()}</span>
                         </div>
                         <div className='d-flex flex-row justify-content-between mt-3'>
-                            <span className=''>Discount</span><span>25% OFF: ${getTotal() * 25 / 100}</span>
+                            <span className=''>Discount</span><span> 25% OFF - ${getTotal() * 25 / 100}</span>
                         </div>
                         <div className='d-flex flex-row justify-content-between mt-3'>
                             <span className=''>Shipping</span><span>Free</span>
                         </div>
                         <div className='d-flex flex-row justify-content-between mt-3'>
-                            <span className=''>Tax</span><span>: ${(getTotal() * 8.25 / 100).toFixed(2)}</span>
+                            <span className=''>Tax</span><span> ${(getTotal() * 8.25 / 100).toFixed(2)}</span>
                         </div>
                         <hr />
                         <div className='d-flex flex-row justify-content-between mt-5'>

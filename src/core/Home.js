@@ -96,7 +96,7 @@ const Home = () => {
             <div>
                 <img src='asset\carousel.jpg' className='image-home w-100'/>
             </div>
-            <div className='d-md-none d-flex text-center small'>
+            <div className='d-xl-none d-flex text-center small'>
                 <Link to='/men' className='bg-light w-50 p-3 border font-weight-bold unlink'>
                     <span >SHOP NEW MENS</span>
                 </Link>

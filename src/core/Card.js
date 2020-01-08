@@ -13,9 +13,8 @@ const Card = ({
     showaddtocartbutton = true,
     cartupdate = false,
     showremovebutton = false,
-    showQuantity = true,
-    run = undefined,
-    setrun = f => f
+    showQuantity = true
+ 
 }) => {
     const [redirect, setredirect] = useState(false);
     const [count, setcount] = useState(product.count);
@@ -28,7 +27,6 @@ const Card = ({
     //     }
     // }
     const increaseCount = product => {
-        setrun(!run);
         let newcount = count + 1;
         if (newcount >= product.quantity) {
             newcount = product.quantity;
@@ -37,7 +35,6 @@ const Card = ({
         updateItem(product._id, newcount);
     };
     const decreaseCount = product => {
-        setrun(!run);
         let newcount = count - 1;
         if (newcount < 1) {
             newcount = 1;
@@ -60,7 +57,6 @@ const Card = ({
         );
     };
     const addToCart = () => {
-        setrun(!run);
         addItem(product, () => {
             setredirect(true);
         });
@@ -85,7 +81,7 @@ const Card = ({
                 <button
                     className="button-card remove-button mt-2 mb-2 w-25"
                     onClick={() => {
-                        setrun(!run);
+            
                         removeItem(product._id);
                     }}
                 >

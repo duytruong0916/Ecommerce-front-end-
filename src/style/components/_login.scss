@@ -1,28 +1,20 @@
-@import '../base/settings';
 
-.login_wrapper {
-    height: 100vh;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.658);
-    background-size: cover;
-    
-}
 .login_box {
-    margin: auto;
-    width: 80%;
-    background-color: none;
-    padding: $l-size $m-size;
-    display: block;
-    @media (min-width: $desktop-breakpoint){
-        width: 60%;
-    }
+  margin: auto;
+  width: 80%;
+  background-color: none;
+  padding: $l-size $m-size;
+  display: block;
+  @media (min-width: $desktop-breakpoint) {
+    width: 60%;
+  }
 }
 
 .login_input {
-    padding: $s-size;
-    width: 100%;
-    border: 0.05rem rgb(172, 169, 169) solid;
+  padding: $s-size;
+  width: 100%;
+  border: 0.05rem rgb(172, 169, 169) solid;
 }
-.login_invalid_input{
-    border: 0.05rem $red solid;
+.login_invalid_input {
+  border: 0.05rem $red solid;
 }

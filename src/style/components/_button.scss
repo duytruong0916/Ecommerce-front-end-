@@ -44,6 +44,9 @@
         font-size: $font-size-medium;
         padding: $xxs-size;
     }
+    &:hover{
+        background-color: $off-white;
+    }
 }
 .button-circle
 {

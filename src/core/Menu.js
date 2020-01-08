@@ -32,6 +32,9 @@ const Menu = (props) => {
             <div className='pb-5' onClick={handleClick}>
                 <NavLink to='/shop' activeClassName='is-active' className='link-nav'>ALL PRODUCTS</NavLink>
             </div>
+            <div className='pb-5' onClick={handleClick}>
+                <NavLink to='/about' activeClassName='is-active' className='link-nav'>ABOUT</NavLink>
+            </div>
 
             {props.islogin && (
                 <div className='text-danger pb-5' onClick={handleClick}>
@@ -49,14 +52,17 @@ const Menu = (props) => {
                 </NavLink>
             </span>
             <div className="main ">
-                <span className='ml-5 mr-5' onClick={handleClick}>
+                <span onClick={handleClick}>
                     <NavLink to='/men' activeClassName='is-active' className='link-nav'>MENS</NavLink>
                 </span>
-                <span className='ml-5 mr-5'>
+                <span>
                     <NavLink to='/women' activeClassName='is-active' className='link-nav'>WOMENS</NavLink>
                 </span>
-                <span className='ml-5 mr-5'>
+                <span>
                     <NavLink to='/shop' activeClassName='is-active' className='link-nav'>All Products</NavLink>
+                </span>
+                <span>
+                    <NavLink to='/about' activeClassName='is-active' className='link-nav'>ABOUT</NavLink>
                 </span>
             </div>
             <span className='account-dropdown'>
@@ -75,7 +81,7 @@ const Menu = (props) => {
                     <NavLink to={props.islogin ? '/admin/dashboard' : '/signin'} ><i className="fa fa-user-secret" aria-hidden="true"></i></NavLink>
                 </span>}
                 <span className='ml-4 mr-4' data-toggle="modal" data-target="#myModal" ref={cartRef}>
-                    <i className="fa fa-shopping-bag" aria-hidden="true"></i>{props.numberOfItem > 0 && <sup><small className='cart-badge'>{props.numberOfItem}</small></sup>}
+                    <i className="fa fa-shopping-bag mr-2" aria-hidden="true"></i>{props.numberOfItem > 0 && <sup><small className='cart-badge' style={{fontSize: '15px'}}>{props.numberOfItem}</small></sup>}
                 </span>
             </div>
         </div>
@@ -86,9 +92,9 @@ const Menu = (props) => {
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <i className="fa fa-shopping-bag" aria-hidden="true"></i>
-                        <div className="modal-title">REVIEW YOUR CART</div>
-                        <button type="button" className='button button-white' data-dismiss="modal"style={{fontSize:'18px'}}>&times;</button>
+                        <i className="fa fa-shopping-bag text-white mt-3" aria-hidden="true"></i>
+                        <div className="modal-title text-white">REVIEW YOUR CART</div>
+                        <button className='button button-white' data-dismiss="modal"style={{fontSize:'18px'}}>&times;</button>
                     </div>
                     <div className="modal-body">
                         <Cart cartClick={cartClick} isinmenu={true} />

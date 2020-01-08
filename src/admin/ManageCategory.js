@@ -61,15 +61,12 @@ const ManageCategory = (props) => {
     }, [])
 
     return (
-        <Layout title='Manage Categories' description='Manage your Categories'>
-            <div >
+          <div className='category-wrapper'>
                 <h2 className='mb-4'>Total {categories.length} categories:</h2>
                 {ShowMessage(deleted)}
                 {ShowTable(categories)}
             </div>
 
-
-        </Layout>
     )
 }
 

@@ -6,6 +6,7 @@ import EmailPasswordPage from '../user/EmailPassword'
 const Signin = ({ incheckout = false }) => {
     return (
         <Layout title='Signin Page' description='App Node-React'>
+            <div className ='login-poster'></div>
             <div className='login_wrapper'>
                 <div className="login_box">
                     {!incheckout && <div>
@@ -13,8 +14,9 @@ const Signin = ({ incheckout = false }) => {
                         <div className='text-center'>It's time to manage your account</div>
                     </div>}
                     <EmailPasswordPage />
-                    <button className='button w-100 mt-4 p-4'>Login with Google</button>
-                    <div className='text-center mt-4 new-link-color small' >New to TimeFox? <NavLink to="/signup">CREATE AN ACCOUNT</NavLink></div>
+                    <div className='text-center mt-4 new-link-color ' >
+                        <div>New to TimeFox? </div>
+                        <NavLink to="/signup">CREATE AN ACCOUNT</NavLink></div>
                 </div>
             </div>
         </Layout>

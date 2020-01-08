@@ -8,10 +8,11 @@ const Profile = (props) => {
         name: '',
         email: '',
         password: '',
+        confirmpassword: '',
         error: '',
         success: false
     })
-    const { name, email, password, error, success } = values;
+    const { name, email, password, confirmpassword,error, success } = values;
     const init = (userid) => {
         read(userid, props.user.token ).then(response=>{
             if(response.error){
@@ -46,17 +47,21 @@ const Profile = (props) => {
             <form>
                 <div className ='form-group'>
                     <label className ='text-muted'>Name: </label>
-                    <input type='text' onChange ={handleChange('name')}  className='form-control' value={name}/>
+                    <input type='text' onChange ={handleChange('name')}     className='text-input w-100 ml-4 mt-4' value={name}/>
                 </div>
                 <div className ='form-group'>
                     <label className ='text-muted'>Email: </label>
-                    <input type='email' onChange ={handleChange('email')}  className='form-control' value={email}/>
+                    <input type='email' onChange ={handleChange('email')}     className='text-input w-100 ml-4 mt-4' value={email}/>
                 </div>
                 <div className ='form-group'>
                     <label className ='text-muted'>Password: </label>
-                    <input type='password' onChange ={handleChange('password')}  className='form-control' value={undefined}/>
+                    <input type='password' onChange ={handleChange('password')}     className='text-input w-100 ml-4 mt-4' value={undefined}/>
                 </div>
-                <button className ='button' onClick= {ClickSubmit}>Submit</button>
+                <div className ='form-group'>
+                    <label className ='text-muted'>Confirm password: </label>
+                    <input type='password' onChange ={handleChange('confirmpassword')}     className='text-input w-100 ml-4 mt-4' value={undefined}/>
+                </div>
+                <button className ='button-card w-50' onClick= {ClickSubmit}>Submit</button>
             </form>
         )
     }
@@ -65,11 +70,12 @@ const Profile = (props) => {
     }, [])
 
     return (
-        <Layout title='PROFILE' description='Let update the profile'>
-            <h1>PROFILE</h1>
+        <div className='profile-wrapper'>
+            <div className='page-header-title text-center'>PROFILE</div>
             {ProfileUpdate(name,email, password)}
             {RedirectUser(success)}
-        </Layout>
+        </div>
+            
     )
 }
 
