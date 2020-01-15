@@ -123,7 +123,8 @@ export class SignUpForm extends React.Component {
     }
 }
 const MapStateToProps = (state) => ({
-    signupError: state.auth.authError
+    signupError: state.auth.authError,
+    signupMessage: state.auth.message
 })
 const mapDispatchToProps = (dispatch) => {
     return {

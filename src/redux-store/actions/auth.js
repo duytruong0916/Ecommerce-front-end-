@@ -1,7 +1,7 @@
 import  API  from '../../config';
 export const startSignUpWithEmail = (new_user = {}) => {
     return (dispatch) => {
-       return fetch(`${API}/user/register`,{
+       return fetch(`${API}/signup`,{
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -13,23 +13,22 @@ export const startSignUpWithEmail = (new_user = {}) => {
           return response.json();
           
         })
-        .then(({msg,success})=>{
-            if(success){
-                return dispatch({ type: 'SIGNUP_SUCCESS'});
+        .then(({message, error})=>{
+            if(message){
+                return dispatch({ type: 'SIGNUP_SUCCESS',message});
             }
-            return dispatch({ type: 'SIGNUP_ERROR', msg });
+            return dispatch({ type: 'SIGNUP_ERROR', error});
             
         })
-        .catch((err) => {
-            return dispatch({ type: 'SIGNUP_ERROR', err });
+        .catch((error) => {
+            return dispatch({ type: 'SIGNUP_ERROR', error });
         });
     }
   }
 
   export const startLoginWithEmail = (user = {}) => {
-      console.log(API)
     return (dispatch) => {
-       return fetch(`${API}/user/authenticate`,{
+       return fetch(`${API}/signin`,{
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -42,22 +41,23 @@ export const startSignUpWithEmail = (new_user = {}) => {
           
         })
         .then((data)=>{
-            console.log(data.success)
-            console.log(data.msg)
-            if(data.success){
+            if(data.token){
                 //save the user o localstorage
                 if(typeof window !=='undefined'){
                     localStorage.setItem('jwt', JSON.stringify(data))
                 }
-                const user =  data;
+                const user =  {
+                    user:   data.user,
+                    token: data.token
+                }
                 return dispatch({ type: 'LOGIN_SUCCESS', user});
             }
-            const msg = data.msg;
-            return dispatch({ type: 'LOGIN_ERROR', msg });
+            const error = data.error;
+            return dispatch({ type: 'LOGIN_ERROR', error});
             
         })
-        .catch((err) => {
-            return dispatch({ type: 'LOGIN_ERROR', err });
+        .catch((error) => {
+            return dispatch({ type: 'LOGIN_ERROR', error });
         });
     }
   }

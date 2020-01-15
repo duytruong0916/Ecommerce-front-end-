@@ -1,6 +1,7 @@
 const defaultState = {
   userrole: 0,
   user: undefined,
+  message: null,
   authError: null,
   resetError: null,
   checkout: false
@@ -11,7 +12,7 @@ export default (state = defaultState, action) => {
       console.log('login error');
       return {
         ...state,
-        authError: 'INVALID EMAIL/PASSOWORD'
+        authError: action.error
       }
 
     case 'LOGIN_SUCCESS':
@@ -30,14 +31,15 @@ export default (state = defaultState, action) => {
       console.log('signup success')
       return {
         ...state,
-        authError: null
+        authError: null,
+        message: action.message
       }
 
     case 'SIGNUP_ERROR':
       console.log('signup error')
       return {
         ...state,
-        authError: action.msg
+        authError: action.error
       }
     case 'CHECK_OUT':
       console.log('start to checkout')

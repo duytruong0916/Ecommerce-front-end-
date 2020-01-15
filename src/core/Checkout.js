@@ -1,7 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import CheckoutForm from '../user/CheckoutForm';
 import ShowImage from "../core/ShowImage";
-import Signin from '../user/Signin';
+//import Signin from '../user/Signin';
+import Signin from '../auth/signin';
 import Carousel from '../core/Carousel';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
