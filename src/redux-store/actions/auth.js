@@ -61,7 +61,18 @@ export const startSignUpWithEmail = (new_user = {}) => {
         });
     }
   }
-
+export const startLoginWithFacebookGoogle = (response)=>{
+    return (dispatch)=>{
+        if(typeof window !=='undefined'){
+            localStorage.setItem('jwt', JSON.stringify(response.data))
+        }
+        const user = {
+            token: response.data.token,
+            user: response.data.user
+        }
+        return dispatch({ type: 'LOGIN_SUCCESS', user});
+    }
+}
 export const startLogOut = ()=>{
     if(typeof window !=='undefined'){
         localStorage.removeItem('jwt');

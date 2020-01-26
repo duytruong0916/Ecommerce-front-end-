@@ -49,7 +49,7 @@ const CheckoutForm = ({handleForm}) => {
                             type='text'
                             placeholder='Last name'
                             value={lastname}
-                            onChange={onChangeHandler('firstname')} />
+                            onChange={onChangeHandler('lastname')} />
                     </div>
                 </div>
                 <div className=''>

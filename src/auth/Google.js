@@ -24,6 +24,7 @@ const Google = ({informParent =f =>f}) => {
             <GoogleLogin
                 clientId='942121231116-hu0oi3knkr9ck61kv01c1qd2e1ogoics.apps.googleusercontent.com'
                 buttonText="Login"
+                autoLoad={false}
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 render={renderProps => (
