@@ -38,9 +38,9 @@ export const removeLocalStorage = (key)=>{
 //authenticate
 export const authenticate = (response, next)=>{
     console.log('Authentication on signin response', response);
-    setCookie('token', response.data.token);
-    setLocalStorage('user', response.data.user);
-    next(response);
+    setCookie('token', response.token);
+    setLocalStorage('user', response.user);
+    next();
 
 }
 export const isAuth = ()=>{

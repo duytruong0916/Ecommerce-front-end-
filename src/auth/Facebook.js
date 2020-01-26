@@ -4,26 +4,27 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 const Facebook = ({informParent =f =>f}) => {
 
     const responseFacebook = (response) => {
-        console.log(response)
-        axios({
-            method: 'POST',
-            url: `${process.env.REACT_APP_API}/facebook-login`,
-            data: {userID: response.userID, accessToken: response.accessToken}
-        })
-        .then(response=>{
-            console.log("GOOGLE SIGNIN SUCCESS:", response)
-            informParent(response);
-        })
-        .catch(err=>{
-            console.log("GOOGLE SIGNIN ERROR:", err)
-        })
+        console.log(response);
+      
+        // axios({
+        //     method: 'POST',
+        //     url: `${process.env.REACT_APP_API}/google-login`,
+        //     data: {idToken: response.tokenId}
+        // })
+        // .then(response=>{
+        //     console.log("GOOGLE SIGNIN SUCCESS:", response)
+        //     informParent(response);
+        // })
+        // .catch(err=>{
+        //     console.log("GOOGLE SIGNIN ERROR:", err)
+        // })
       }
        
     return (
         <div>
             <FacebookLogin
                 appId={`${process.env.REACT_APP_FACEBOOKCLIENTID}`}
-                autoLoad={false}
+                autoLoad={true}
                 fields="name,email,picture"
                 callback={responseFacebook}
                 render={renderProps => (

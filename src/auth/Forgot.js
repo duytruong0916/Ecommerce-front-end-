@@ -27,7 +27,6 @@ const Forgot = () => {
                     setdata({email:'',error:'',success: response.data.message});
             })
             .catch(error=>{
-                console.log( error.response.data.error)
                 setdata({...data, error: error.response.data.error});
             })
         }

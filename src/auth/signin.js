@@ -1,12 +1,12 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
-import {startLoginWithEmail,startLoginWithFacebookGoogle } from '../redux-store/actions/auth';
+import {startLoginWithEmail} from '../redux-store/actions/auth';
 import axios from 'axios';
 import {Redirect , Link} from 'react-router-dom';
 import {authenticate, isAuth } from '../auth/Helpers';
 import Google from '../auth/Google';
 import Facebook from '../auth/Facebook';
-const SignIn = ({userinfor,islogin,AuthError, incheckout = false, startLoginWithEmail,startLoginWithFacebookGoogle}) => {
+const SignIn = ({userinfor,islogin,AuthError, incheckout = false, startLoginWithEmail}) => {
     const [data, setdata] = useState({
         password: '',
         confirmpassword: '',
@@ -14,24 +14,23 @@ const SignIn = ({userinfor,islogin,AuthError, incheckout = false, startLoginWith
         error: false,
         success:false,
         errornotmatch: false,
-        name:'',
-        submit: false
+        name:''
     })
-    const {success,email, password, confirmpassword, error, errornotmatch,name,submit } = data;
+    const {success,email, password, confirmpassword, error, errornotmatch,name } = data;
     const onChangeHandler = name => (e) => {
         const value = e.target.value;
         setdata({ ...data, [name]: value });
     }
     const informParent = (response)=>{
-            startLoginWithFacebookGoogle(response);
+        authenticate(response, ()=>{
             setdata({email:'',error:'',password: '',confirmpassword:'',success: true,name:response.data.user.lastname});
+        });
     }
     useEffect(()=>{
-        setdata({...data, error:AuthError, submit:false})
-    },[submit, AuthError])
+        setdata({...data, error:AuthError})
+    },[AuthError])
     const onSubmit = (e) => {
         e.preventDefault();
-        setdata({...data, submit: true})
         // console.log(process.env.REACT_APP_GOOGLECLIENTID)
         if(!email||!password||!confirmpassword){
             setdata({...data, error: 'Missing required fields'});
@@ -39,7 +38,7 @@ const SignIn = ({userinfor,islogin,AuthError, incheckout = false, startLoginWith
             setdata({...data, errornotmatch: 'Passwords do not match'})
         }else{
             startLoginWithEmail({email, password});
-            setdata({email:'',password: '',confirmpassword:''})
+            setdata({email:'',error:'',password: '',confirmpassword:''})
             //console.log(`${process.env.REACT_APP_API}`)
             // axios({
             //     method: 'POST',
@@ -106,7 +105,6 @@ const SignIn = ({userinfor,islogin,AuthError, incheckout = false, startLoginWith
                     </div>
                 </div>
                 <div className='text-center text-danger m-4'>
-                    {/* {AuthError&&(<div>{AuthError}</div>)} */}
                     {error&&(<div>{error}</div>)}
                     {!error&&errornotmatch&&(<div>{errornotmatch}</div>)}
                 </div>
@@ -126,7 +124,7 @@ const SignIn = ({userinfor,islogin,AuthError, incheckout = false, startLoginWith
         </div>
     )
     return (
-        <div className='Signup-wrapper mx-auto'>
+        <div className='Signup-wrapper mx-auto py-5'>
              {onRedirect()}
             {ShowForm()}
             <div>
@@ -146,8 +144,7 @@ const mapStatetoProps = (state) => ({
     userinfor : state.auth.user
  })
  const mapDispatchToProps = (dispatch) => ({
-   startLoginWithEmail: (info) => dispatch(startLoginWithEmail(info)),
-   startLoginWithFacebookGoogle: (response) => dispatch(startLoginWithFacebookGoogle(response))
+   startLoginWithEmail: (info) => dispatch(startLoginWithEmail(info))
  });
  
  export default connect(mapStatetoProps, mapDispatchToProps)(SignIn);

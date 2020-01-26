@@ -9,7 +9,7 @@ const SignUp = (props) => {
         lastname: '',
         password: '',
         confirmpassword: '',
-        addressNumber: '',
+        address: '',
         city: '',
         state: '',
         email: '',
@@ -19,7 +19,7 @@ const SignUp = (props) => {
         success: false,
         errornotmatch: false,
     })
-    const { firstname, lastname, success, addressNumber, city, state, email, phone, zipcode, password, confirmpassword, error, errornotmatch } = data;
+    const { firstname, lastname, success, address, city, state, email, phone, zipcode, password, confirmpassword, error, errornotmatch } = data;
     const onChangeHandler = name => (e) => {
         const value = e.target.value;
         setdata({ ...data, [name]: value });
@@ -32,15 +32,15 @@ const SignUp = (props) => {
             setdata({ ...data, errornotmatch: 'Passwords do not match' })
         } else {
             setdata({ ...data, error: '', errornotmatch: '' })
-            let address = `${addressNumber}. ${city}, ${state}-${zipcode}`;
+            let addressinfo = `${address}, ${city} ${state}-${zipcode}`;
             axios({
                 method: 'POST',
                 url: `http://localhost:8000/api/signup`,
-                data: { firstname, lastname, email, password, phone, address}
+                data: { firstname, lastname, email, password, phone, address: addressinfo }
             })
                 .then((response) => {
                     console.log(response.data.message)
-                    setdata({ firstname: '', lastname: '', email: '', state: '', error: '', zipcode: '', city: '', addressNumber: '', password: '', confirmpassword: '', success: response.data.message });
+                    setdata({ firstname: '', lastname: '', email: '', state: '', error: '', zipcode: '', city: '', address: '', password: '', confirmpassword: '', success: response.data.message });
                 })
                 .catch(error => {
                     console.log(error)
@@ -87,9 +87,9 @@ const SignUp = (props) => {
                                 <input
                                     className='text-input w-100'
                                     type='text'
-                                    value={addressNumber}
+                                    value={address}
                                     placeholder='Address (OR PO BOX)'
-                                    onChange={onChangeHandler('addressNumber')} />
+                                    onChange={onChangeHandler('address')} />
                             </div>
                             <div >
                                 <select onChange={onChangeHandler('state')} className='text-input w-50' value={state}>

@@ -7,7 +7,7 @@ import { startLogOut } from "../redux-store/actions/auth";
 import moment from "moment";
 const UserDashboard = props => {
     const [purchasehistoy, setpurchasehistory] = useState([]);
-    const { _id, firstname,lastname, address, phone, email, role } = props.userinfor.user;
+    const { _id, name, email, role } = props.userinfor.user;
     const loadPurchaseHistory = (userid, token) => {
         getPurchaseHistory(userid, token).then(data => {
             if (data.error) {
@@ -22,11 +22,8 @@ const UserDashboard = props => {
             <div className="card mb-3">
                 <div className="page-header-title text-center p-5">PROFILE</div>
                 <ul className="list-group">
-                    <li className="list-group-item"><span className='font-weight-bold'>Lastname:</span> {lastname}</li>
-                    <li className="list-group-item"><span className='font-weight-bold'>Firstname</span> {firstname}</li>
+                    <li className="list-group-item"><span className='font-weight-bold'>Name:</span> {name}</li>
                     <li className="list-group-item"><span className='font-weight-bold'>Email:</span> {email}</li>
-                    <li className="list-group-item"><span className='font-weight-bold'>Address:</span> {address}</li>
-                    <li className="list-group-item"><span className='font-weight-bold'>Phone:</span> {phone}</li>
                     <li className="list-group-item"><span className='font-weight-bold'>Role:</span> {role === 1 ? "Admin" : "User"}</li>
                     <li className="list-group-item text-center mt-4">
                         <Link to={`/profile/${_id}`}>
